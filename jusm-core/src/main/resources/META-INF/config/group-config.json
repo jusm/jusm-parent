@@ -1,0 +1,37 @@
+ [
+    {
+      "status": "ENABLED",
+      "name": "系统管理员组",
+      "number": "group_admin",
+      "description": "系统管理员组描述",
+      "children": []
+    },
+    {
+      "status": "ENABLED",
+      "name": "用户组",
+      "number": "group_user",
+      "description": "用户组 描述",
+      "children": []
+    },
+    {
+      "status": "ENABLED",
+      "name": "数据库管理员组",
+      "number": "group_dba",
+      "description": "数据库管理员组 描述",
+      "children": []
+    },
+    {
+      "status": "ENABLED",
+      "name": "接口调用者组",
+      "number": "group_caller",
+      "description": "接口调用者组描述",
+      "children": []
+    },
+    {
+      "status": "ENABLED",
+      "name": "业务管理员组",
+      "number": "group_bizer",
+      "description": "业务管理员组描述",
+      "children": []
+    }
+ ]

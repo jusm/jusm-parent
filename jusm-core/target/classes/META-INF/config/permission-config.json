@@ -1,0 +1,349 @@
+[
+	{
+		"icon": "fa fa-link",
+		"name": "系统管理",
+		"number": "p_1",
+		"uri": null,
+		"httpMethod": null,
+		"type": "MENU",
+		"description": "一级菜单",
+		"position": 1,
+		"children": [
+			{
+				"icon": "fa fa-link",
+				"name": "用户管理",
+				"number": "p_1_1",
+				"uri": "/user.html",
+				"httpMethod": null,
+				"type": "MENU",
+				"description": "二级菜单",
+				"position": 1,
+				"children": [
+					{
+						"icon": "fa fa-link",
+						"name": "用户添加",
+						"number": "p_1_1_1",
+						"uri": "/user-add.html",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "用户删除",
+						"number": "p_1_1_2",
+						"uri": "/users",
+						"httpMethod": 'DELETE',
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "用户修改",
+						"number": "p_1_1_3",
+						"uri": "/users",
+						"httpMethod": 'PUT',
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "用户查询",
+						"number": "p_1_1_4",
+						"uri": "/users",
+						"httpMethod": 'GET',
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					}
+				]
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "角色管理",
+				"number": "p_1_2",
+				"uri": "/roles/**",
+				"httpMethod": null,
+				"type": "MENU",
+				"description": "描述暂无",
+				"position": 0,
+				"children": [
+					{
+						"icon": "fa fa-link",
+						"name": "角色添加",
+						"number": "p_1_2_1",
+						"uri": "roles",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "角色修改",
+						"number": "p_1_2_2",
+						"uri": "roles",
+						"httpMethod": "PUT",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "角色删除",
+						"number": "p_1_2_3",
+						"uri": "roles",
+						"httpMethod": "DELETE",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "角色查询",
+						"number": "p_1_2_4",
+						"uri": "roles",
+						"httpMethod": "GET",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					}
+				]
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "权限管理",
+				"number": "p_1_3",
+				"uri": "/permissions/**",
+				"httpMethod": null,
+				"type": "MENU",
+				"description": "描述暂无",
+				"position": 0,
+				"children": [
+					{
+						"icon": "fa fa-link",
+						"name": "权限添加",
+						"number": "p_1_3_1",
+						"uri": "permissions",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "权限修改",
+						"number": "p_1_3_2",
+						"uri": "permissions",
+						"httpMethod": "PUT",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "权限删除",
+						"number": "p_1_3_3",
+						"uri": "permissions",
+						"httpMethod": "DELETE",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "权限查询",
+						"number": "p_1_3_4",
+						"uri": "permissions",
+						"httpMethod": "GET",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					}
+				]
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "菜单管理",
+				"number": "p_1_4",
+				"uri": "/menus/menu.html",
+				"httpMethod": null,
+				"type": "MENU",
+				"description": "描述暂无",
+				"position": 0,
+				"children": [
+					{
+						"icon": "fa fa-link",
+						"name": "菜单添加",
+						"number": "p_1_4_1",
+						"uri": "menus",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "菜单修改",
+						"number": "p_1_4_2",
+						"uri": "menus",
+						"httpMethod": "PUT",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "菜单删除",
+						"number": "p_1_4_3",
+						"uri": "menus",
+						"httpMethod": "DELETE",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					},
+					{
+						"icon": "fa fa-link",
+						"name": "菜单查询",
+						"number": "p_1_4_4",
+						"uri": "menus",
+						"httpMethod": 'GET',
+						"type": "MENU",
+						"description": "描述暂无",
+						"position": 0,
+						"children": []
+					}
+				]
+			}
+		]
+	},
+	{
+		"icon": "fa fa-link",
+		"name": "接口文档",
+		"number": "p_2",
+		"uri": "/swagger-ui.html",
+		"httpMethod": "GET",
+		"type": "MENU",
+		"description": "描述暂无",
+		"position": 2,
+		"children": [
+			{
+				"icon": "fa fa-link",
+				"name": "API接口调用GET",
+				"number": "p_2_1",
+				"uri": "/api/**",
+				"httpMethod": "GET",
+				"type": "MENU",
+				"description": "以/api/**开始的接口",
+				"position": 1,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "短链接接口调用",
+				"number": "p_2_2",
+				"uri": "/short-uri/**",
+				"httpMethod": null,
+				"type": "FUNCTION",
+				"description": "以/glue/**开始 可执行逻辑代码接口调用",
+				"position": 2,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "短链接记录删除",
+				"number": "p_2_3",
+				"uri": "/short-uri/remove",
+				"httpMethod": 'POST',
+				"type": "FUNCTION",
+				"description": "短链接记录删除",
+				"position": 3,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "短链接记录查询",
+				"number": "p_2_4",
+				"uri": "/short-uri/list",
+				"httpMethod": 'GET',
+				"type": "FUNCTION",
+				"description": "短链接记录删除",
+				"position": 4,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "短链接记录分页查询",
+				"number": "p_2_5",
+				"uri": "/short-uri/page-list",
+				"httpMethod": 'GET',
+				"type": "FUNCTION",
+				"description": "短链接记录删除",
+				"position": 5,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "API接口调用POST",
+				"number": "p_2_6",
+				"uri": "/api/**",
+				"httpMethod": "POST",
+				"type": "MENU",
+				"description": "以/api/**开始的接口",
+				"position": 6,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "API日志统计POST",
+				"number": "p_2_7",
+				"uri": "/apilog/**",
+				"httpMethod": "POST",
+				"type": "MENU",
+				"description": "apilog",
+				"position": 7,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "API日志统计GET",
+				"number": "p_2_8",
+				"uri": "/apilog/**",
+				"httpMethod": "GET",
+				"type": "MENU",
+				"description": "apilog",
+				"position": 8,
+				"children": []
+			}
+		]
+	},
+	{
+		"icon": "fa fa-link",
+		"name": "即席查询",
+		"number": "p_3",
+		"uri": "/h2-console/**",
+		"httpMethod": "GET",
+		"type": "MENU",
+		"description": "描述暂无",
+		"position": 3,
+		"children": []
+	}
+]

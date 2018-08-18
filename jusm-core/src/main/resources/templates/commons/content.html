@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Content</title>
+</head>
+<body>
+	<section class="content-header" th:fragment="content-header(name,desc)">
+		<h1>
+			[[${name}]]<small>[[${desc}]]</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+			<li class="active">Here</li>
+		</ol>
+	</section>
+</body>
+</html>

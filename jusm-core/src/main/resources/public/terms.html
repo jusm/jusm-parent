@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>统一系统管理(USM) | 协议</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="css/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+            </div>
+          </form>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class="dropdown messages-menu">
+              <!-- Menu toggle button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-envelope-o"></i>
+                <span class="label label-success">4</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 4 messages</li>
+                <li>
+                  <!-- inner menu: contains the messages -->
+                  <ul class="menu">
+                    <li><!-- start message -->
+                      <a href="#">
+                        <div class="pull-left">
+                          <!-- User Image -->
+                          <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <!-- Message title and timestamp -->
+                        <h4>
+                          Support Team
+                          <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        </h4>
+                        <!-- The message -->
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
+                    </li>
+                    <!-- end message -->
+                  </ul>
+                  <!-- /.menu -->
+                </li>
+                <li class="footer"><a href="#">See All Messages</a></li>
+              </ul>
+            </li>
+            <!-- /.messages-menu -->
+
+            <!-- Notifications Menu -->
+            <li class="dropdown notifications-menu">
+              <!-- Menu toggle button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="label label-warning">10</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 10 notifications</li>
+                <li>
+                  <!-- Inner Menu: contains the notifications -->
+                  <ul class="menu">
+                    <li><!-- start notification -->
+                      <a href="#">
+                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      </a>
+                    </li>
+                    <!-- end notification -->
+                  </ul>
+                </li>
+                <li class="footer"><a href="#">View all</a></li>
+              </ul>
+            </li>
+            <!-- Tasks Menu -->
+            <li class="dropdown tasks-menu">
+              <!-- Menu Toggle Button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-flag-o"></i>
+                <span class="label label-danger">9</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 9 tasks</li>
+                <li>
+                  <!-- Inner menu: contains the tasks -->
+                  <ul class="menu">
+                    <li><!-- Task item -->
+                      <a href="#">
+                        <!-- Task title and progress text -->
+                        <h3>
+                          Design some buttons
+                          <small class="pull-right">20%</small>
+                        </h3>
+                        <!-- The progress bar -->
+                        <div class="progress xs">
+                          <!-- Change the css width attribute to simulate progress -->
+                          <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">20% Complete</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <!-- end task item -->
+                  </ul>
+                </li>
+                <li class="footer">
+                  <a href="#">View all tasks</a>
+                </li>
+              </ul>
+            </li>
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">Alexander Pierce</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                  <p>
+                    Alexander Pierce - Web Developer
+                    <small>Member since Nov. 2012</small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
+                <li class="user-body">
+                  <div class="row">
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Followers</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Sales</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="#">Friends</a>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-custom-menu -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+      <!-- Content Header (Page header) -->
+      <section class="content-header  text-center">
+         <h1>统一管理系统服务条款<small>USM terms</small></h1>
+      </section>
+	  
+	  <section class="content">
+    <div class="WordSection1">
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">欢迎您来到开源中国社区（以下简称</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">“</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">本网站</span><span lang="ZH-TW" style="font-family:
+&quot;冬青黑体简体中文 W3&quot;">”</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">本网站由深圳市奥思网络科技有限公司（以下简称</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">“</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">奥思网络</span><span lang="ZH-TW" style="font-family:
+&quot;冬青黑体简体中文 W3&quot;">”</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）运行维护。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">请您仔细阅读以下条款，如果您对本协议的任何条款表示异议，您可以选择不进入开源中国社区。当您注册成功，无论是进入开源中国社区，还是在开源中国社区上发布任何内容（即「内容」），均意味着您（即「用户」）完全接受本协议项下的全部条款。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">使用规则</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户注册成功后，本网站将给予每个用户一个用户帐号及相应的密码，该用户帐号和密码由用户负责保管，用户不应将账号或密码告知第三方，或者将其帐号、密码转让、出借予他人使用或与第三方共用。如用户发现其帐号遭他人非法使用，应立即通知</span><span style="font-family:&quot;冬青黑体简体中文 W3&quot;">本网站<span lang="ZH-TW">，因黑客行为或用户的保管疏忽等非本网站原因导致帐号、密码遭他人非法使用或无法正常使用的，本网站不承担任何责任；用户应当对以其用户帐号进行的所有活动和事件负法律责任。</span></span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户应提供及时、详尽及准确的个人资料，并不断更新注册资料，用户须对在本网站的注册信息的真实性、合法性、有效性承担全部责任，用户不得冒充他人；不得利用他人的名义发布任何信息；不得恶意使用注册帐号导致其他用户误认；否则开源中国社区有权立即停止提供服务，收回其帐号并由用户独自承担由此而产生的一切法律责任。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户直接或通过各类方式（如</span><span lang="ZH-TW"> </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">RSS </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">源和站外</span><span lang="ZH-TW"> </span><span lang="EN-US" style="font-family:&quot;冬青黑体简体中文 W3&quot;">API </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">引用等）间接使用本网站服务和数据的行为，都将被视作已无条件接受本协议全部内容；若用户对本协议的任何条款存在异议，请停止使用开源中国社区所提供的全部服务。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">4</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、本网站是一个信息分享、传播及获取的平台，用户通过开源中国社区发表的信息为公开的信息，其他第三方均可以通过本网站获取用户发表的信息，用户对任何信息的发表即认可该信息为公开的信息，并单独对此行为承担法律责任；任何用户不愿被其他第三人获知的信息都不应该在本网站上进行发表。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">5</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户承诺不得以任何方式利用本网站直接或间接从事违反中国法律以及社会公德的行为，本网站有权对违反上述承诺的内容予以删除。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">6</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户不得利用开源中国社区服务制作、上载、复制、发布、传播或者转载如下内容：</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">反对宪法所确定的基本原则的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">损害国家荣誉和利益的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">煽动民族仇恨、民族歧视，破坏民族团结的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">破坏国家宗教政策，宣扬邪教和封建迷信的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">散布谣言，扰乱社会秩序，破坏社会稳定的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">侮辱或者诽谤他人，侵害他人合法权益的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">_ </span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">含有法律、行政法规禁止的其他内容的信息。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">7</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;font-emphasize:
+dot">、</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">本网站有权对用户使用本网站的情况进行审查和监督，如用户在使用本网站时违反任何上述规定，本网站或其授权的人有权要求用户改正或直接采取一切必要的措施（包括但不限于更改或删除用户张贴的内容、暂停或终止用户使用本网站的权利），因此产生的全部责任及损失由用户承担。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">知识产权</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">本网站是一个信息获取、分享及传播的平台，我们尊重和鼓励本网站用户创作的内容，认识到保护知识产权对开源中国社区生存与发展的重要性，承诺将保护知识产权作为本网站运营的基本原则之一。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户在本网站发表的全部原创内容（包括但不仅限于回答、文章和评论），著作权均归用户本人所有。用户可授权第三方以任何方式使用，不需要得到开源中国社区的同意。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、本网站提供的网络服务中包含的标识、版面设计、排版方式、文本、图片、图形等均受著作权法、商标法及其它法律保护，未经相关权利人（含本网站及其他原始权利人）同意，上述内容均不得在任何平台被直接或间接发布、使用、出于发布或使用目的的改写或再发行，或以其他任何法律允许外的方式使用。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、为了促进知识的分享和传播，用户将其在本网站发表的全部内容，授予本网站免费的、不可撤销的、非独家、永久的、全球范围内的使用许可，本网站有权将该内容用于本网站各种形态的产品和服务上，包括但不限于网站以及发表的应用或其他互联网产品。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">4</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、除原作者另有说明或法律规定不得转载的情况外，若出于非商业目的，将用户在本网站发表的内容转载在本网站之外的地方，应当在作品的正文开头的显著位置注明原作者姓名（或原作者在本网站使用的帐号名称），给出原始链接，注明「发表于开源中国社区」，并不得对作品进行修改演绎。若需要对作品进行修改，或用于商业目的，应当联系用户获得单独授权，按照用户规定的方式使用该内容。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">5</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、在本网站上传或发表的内容，用户应保证其为相关权利所有人或已取得合法授权，并且该内容不会侵犯任何第三方的合法权益。如果第三方提出关于著作权等合法权益的异议，本网站有权删除相关内容，且有权追究用户的法律责任。给本网站或任何第三方造成损失的，用户应负责全额赔偿。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">6</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、如果任何第三方侵犯了本网站用户相关的权利，用户同意授权开源中国社区或其指定的代理人代表开源中国社区自身或用户对该第三方提出警告、投诉、发起行政执法、诉讼、进行上诉，或谈判和解，并且用户同意在开源中国社区认为必要的情况下参与共同维权。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">7</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、本网站有权但无义务对用户发布的内容进行审核，有权根据相关证据结合《侵权责任法》、《信息网络传播权保护条例》等法律法规及本网站社区指导原则对侵权信息进行处理。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">个人隐私</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、开源中国社区尊重访问本网站的任何个人的隐私信息。当您访问本网站的时候可能被要求提供您个人的基本资料</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">(</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">如姓名、电子邮件、电话号码等</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">)</span><span lang="ZH-TW" style="font-family:
+&quot;冬青黑体简体中文 W3&quot;">，您可以自行选择是否提供。对于您提供的非公开的个人信息，本网站不会将其提供给第三方，但下述情况除外：</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）司法机关、行政机关或其他有关部门要求披露的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）为维护本网站及奥思网络的合法权益、社会公众利益需要披露的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）本网站与第三方合作向用户提供相关网络服务需要向第三方披露的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）依照法律法规要求披露的。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、以下情形造成的任何个人资料的泄露、丢失、被盗用、被篡改等，本网站不承担任何责任：</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）由黑客攻击、计算机病毒侵入或发作、政府管制等本网站不能控制的原因或不可抗力而造成的暂时性关闭等影响网站正常运营的事件所造成的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）用户将个人密码、账号告知他人或与他人共享注册帐号所造成的；</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">（</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">）与本网站链接的任何其它网站造成的。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">侵权处理</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;;color:#FF2600">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">用户在开源中国社区发表的内容仅表明其个人的立场和观点，并不代表本网站的立场或观点。如果个人或企业发现本网站存在侵犯自身合法权益的内容，可以先尝试与作者取得联系，通过沟通协商解决问题。如您无法联系到作者，或无法通过与作者沟通解决问题，您可通过向开源中国社区平台进行投诉。本网站有权直接采取包括但不限于更改或删除用户张贴的内容、暂停或终止用户使用本网站的权利等一切措施，因此产生的全部责任及损失由用户承担。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">不论本侵权举报内容是否完全属实，用户将承担由此产生的一切法律责任，并承担和赔偿本网站因根据投诉人的通知书对相关帐号的处理而造成的任何损失，包括但不限于本网站因向被投诉方赔偿而产生的损失及开源中国社区名誉、商誉损害等。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">免责申明</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、开源中国社区不能对用户发表的回答或评论的正确性进行保证。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、用户在本网站发表的内容仅表明其个人的立场和观点，并不代表本网站的立场或观点。作为内容的发表者，需自行对所发表内容负责，因所发表内容引发的一切纠纷，由该内容的发表者承担全部法律及连带责任。本网站不承担任何法律及连带责任。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">3</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、开源中国社区不保证网络服务一定能满足用户的要求，也不保证网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作保证。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">4</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、对于因不可抗力或开源中国社区不能控制的原因造成的网络服务中断或其它缺陷，开源中国社区不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-size:12.0pt;font-family:&quot;冬青黑体简体中文 W6&quot;">协议修改</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">1</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、根据互联网的发展和有关法律、法规及规范性文件的变化，或者因业务发展需要，本网站有权对本协议的条款作出修改或变更，一旦本协议的内容发生变动，本网站将公布修改之后的协议内容，该公布行为视为开源中国社区已经通知用户修改内容。开源中国社区也可采用电子邮件或私信的传送方式，提示用户协议条款的修改、服务变更、或其它重要事项。</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">&nbsp;</span></p>
+
+        <p class="a"><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">2</span><span lang="ZH-TW" style="font-family:&quot;冬青黑体简体中文 W3&quot;">、如果不同意开源中国社区对本协议相关条款所做的修改，用户有权并应当停止使用本网站。如果用户继续使用本网站，则视为用户接受本网站对本协议相关条款所做的修改。</span></p>
+
+
+    </div>
+</section>
+
+   </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+      </div>
+      <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="js/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="js/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="js/demo.js"></script>
+</body>
+</html>

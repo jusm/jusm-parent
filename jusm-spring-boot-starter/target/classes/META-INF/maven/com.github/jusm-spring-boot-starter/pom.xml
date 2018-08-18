@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github</groupId>
+		<artifactId>jusm-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>jusm-spring-boot-starter</artifactId>
+	<name>jusm-spring-boot-starter</name>
+	<description>包含启动器配置</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.jusm</groupId>
+			<artifactId>jusm</artifactId>
+			<version>${jusm.version}</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,16 @@
+html, body {
+	height: 90% !important;
+}
+
+.hold-transition {
+	background: url(../img/body-bg.png) center no-repeat fixed;
+	background-size: cover;
+}
+
+#content-wrapper {
+	padding-top: 50px;
+}
+
+.carousel-inner>.item>img {
+	min-width: 100%;
+}

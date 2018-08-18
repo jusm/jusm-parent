@@ -1,0 +1,3 @@
+# Auto Configure  com.github.jusm.autoconfigure.MultiWebSecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.jusm.autoconfigure.UsmAutoConfiguration

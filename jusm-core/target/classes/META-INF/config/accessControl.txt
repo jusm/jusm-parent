@@ -1,0 +1,27 @@
+[
+    {
+        "accessInterface": "all",
+        "accessKey": "B10352DE3ECAA6265082655AD4AE6689",
+        "kye": "10001"
+    },
+    {
+        "accessInterface": "all",
+        "accessKey": "A1D75050EE7938CF328CB1A683BDC6FD",
+        "kye": "10002"
+    },
+    {
+        "accessInterface": "all",
+        "accessKey": "39FA233A770CF10522FBACE801B79760",
+        "kye": "10003"
+    },
+    {
+        "accessInterface": "all",
+        "accessKey": "15BE6C30A18E2E9BAF739F457193FDAF",
+        "kye": "10004"
+    },
+    {
+        "accessInterface": "all",
+        "accessKey": "A63F2C3FF29A606979AE9D25F737B342",
+        "kye": "10005"
+    }
+]
