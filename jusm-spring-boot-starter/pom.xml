@@ -12,8 +12,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.github.jusm</groupId>
-			<artifactId>jusm</artifactId>
+			<groupId>com.github</groupId>
+			<artifactId>jusm-core</artifactId>
 			<version>${jusm.version}</version>
 		</dependency>
 	</dependencies>

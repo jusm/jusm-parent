@@ -10,11 +10,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 
 import com.github.jusm.entities.User;
 
@@ -76,28 +78,15 @@ public class UsmAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		request.getSession().setAttribute("user", user);
 		String url = null;
 		// 从别的请求页面跳转过来的情况，savedRequest不为空
-		// SavedRequest savedRequest = requestCache.getRequest(request, response);
-		// if (savedRequest != null) {
-		// url = savedRequest.getRedirectUrl();
-		// }
-		// 直接点击登录页面，根据登录用户的权限跳转到不同的页面
-		// if (url == null) {
-		// 先根据用户的默认角色跳转页面
-		if (user != null && user.getDefaultRole() != null) {
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
+		if (savedRequest != null && StringUtils.isNotBlank(savedRequest.getRedirectUrl())) {
+			url = savedRequest.getRedirectUrl();
+		}else if (user != null && user.getDefaultRole() != null) {
 			url = authDispatcherMap.get(user.getDefaultRole().getAuthority());
 		} else {
-			url = authDispatcherMap.get("role_caller");
-			// for (GrantedAuthority auth : authCollection) {
-			// url = authDispatcherMap.get(auth.getAuthority());
-			// break;
-			// }
+			url = "/index";
 		}
-		getRedirectStrategy().sendRedirect(request, response, url); // 登录之后跳转到error
-		// }
-
-		// super.onAuthenticationSuccess(request, response, authentication);
-		// //登录之后跳转到error
-
+		getRedirectStrategy().sendRedirect(request, response, url); 
 	}
 
 	public RequestCache getRequestCache() {

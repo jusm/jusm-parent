@@ -46,13 +46,12 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="https://github.com/jusm/jusm-parent">GitHub <span class="sr-only">(current)</span></a></li>
+							<li><a th:href="@{/swagger-ui.html}"  target="_blank">接口文档 <span class="sr-only">(current)</span></a></li>
 							<li><a th:href="@{/console}">控制台</a></li>
-							<li><a th:href="@{/login}">登录</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">源码<span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="https://github.com/jusm/jusm-parent" target="_blank">GitHub</a></li>
-									<li><a href="https://gitee.com/wenhoran/jusm" target="_blank">码云</a></li>
+									<li><a href="https://gitee.com/wenhoran/jusm-parent" target="_blank">码云</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -146,8 +145,10 @@
 									<li class="footer"><a href="#">View all tasks</a></li>
 								</ul>
 							</li>
+							
+							<li th:if="${#httpServletRequest.remoteUser == null}"><a th:href="@{/login}">登录</a></li>
 							<!-- User Account Menu -->
-							<li class="dropdown user user-menu">
+							<li th:if="${#httpServletRequest.remoteUser!=null}" class="dropdown user user-menu">
 								<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<img src="img/user2-160x160.jpg" class="user-image" alt="User Image"> 
 									<span class="hidden-xs">[[${#httpServletRequest.remoteUser}]]</span>
@@ -178,7 +179,8 @@
 											<a href="#" class="btn btn-default btn-flat">Profile</a>
 										</div>
 										<div class="pull-right">
-											<a href="#" class="btn btn-default btn-flat">Sign out</a>
+												<a href="javascript:document.getElementById('logout').submit()" class="btn btn-default btn-flat">Sign out</a>
+												<form id="logout" style="display: none" th:action="@{/logout}" method="post" />
 										</div>
 									</li>
 								</ul>

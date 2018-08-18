@@ -39,10 +39,8 @@ public class UsmInstallFilter extends OncePerRequestFilter {
 	 */
 	private String installPath;
 
-	/**
-	 * 
-	 */
-	private String loginPath;
+	
+	private String indexPath;
 
 	/**
 	 * 
@@ -58,26 +56,40 @@ public class UsmInstallFilter extends OncePerRequestFilter {
 
 	private UsmRequestMatcher usmRequestMatcher;
 
-	public UsmInstallFilter(ParameterService parameterService, String loginPath,String installPath,String initPath, String contextPath,	UsmRequestMatcher usmRequestMatcher) {
+	public UsmInstallFilter(ParameterService parameterService, String indexPath, String installPath, String initPath,
+			String contextPath, UsmRequestMatcher usmRequestMatcher) {
 		this.parameterService = parameterService;
-		this.loginPath = loginPath;
 		this.installPath = installPath;
 		this.initPath = initPath;
+		this.indexPath = indexPath;
 		this.contextPath = contextPath;
 		this.installRequestMatcher = new AntPathRequestMatcher(installPath, "GET");
 		this.initRequestMatcher = new AntPathRequestMatcher(initPath, "POST");
 		this.usmRequestMatcher = usmRequestMatcher;
 	}
 
+	/**
+	 * <pre>
+	 *  如果是安装页面路径或者初始化请求
+	 *  如果已经安装直接跳转到主页 
+	 *  true : 直接跳过本类的 doFilterInternal 方法 
+	 *  false : 会调用本类的 doFilterInternal  方法
+	 *  </pre>
+	 */
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+
 		if (usmRequestMatcher.getWebIgnoreRequestMatcher().matches(request)) {
 			return true;
+		} else if (parameterService.isSetup()) {
+			if (installRequestMatcher.matches(request) || initRequestMatcher.matches(request)) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return installRequestMatcher.matches(request) || initRequestMatcher.matches(request);
 		}
-		String lookupPathForRequest = helper.getLookupPathForRequest(request);
-		String originatingRequestUri = helper.getOriginatingRequestUri(request);
-		logger.debug("lookupPathForRequest: " + lookupPathForRequest);
-		logger.debug("originatingRequestUri: " + originatingRequestUri);
-		return installRequestMatcher.matches(request) || initRequestMatcher.matches(request);
+
 	}
 
 	@Override
@@ -90,7 +102,7 @@ public class UsmInstallFilter extends OncePerRequestFilter {
 		} else {
 			String uri = helper.getLookupPathForRequest(request);
 			if (initPath.equals(uri) || installPath.equals(uri)) {
-				response.sendRedirect(getCompleteURL(request, loginPath));
+				response.sendRedirect(getCompleteURL(request, indexPath));
 			} else {
 				filterChain.doFilter(request, response);
 			}
