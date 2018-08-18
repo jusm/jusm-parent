@@ -2,7 +2,7 @@ package com.github.jusm.security;
 
 import java.io.Serializable;
 
-class JwtAuthenticationResponse implements Serializable {
+public class JwtAuthenticationResponse implements Serializable {
 
     private static final long serialVersionUID = 1250166508152483573L;
 

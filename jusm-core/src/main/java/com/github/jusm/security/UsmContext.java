@@ -3,9 +3,9 @@ package com.github.jusm.security;
 import java.util.Map;
 
 import com.github.jusm.autoconfigure.UsmProperties;
+import com.github.jusm.component.SpringContextHolder;
 import com.github.jusm.entities.Parameter;
 import com.github.jusm.service.ParameterService;
-import com.github.jusm.util.SpringContextHolder;
 
 /**
  * 

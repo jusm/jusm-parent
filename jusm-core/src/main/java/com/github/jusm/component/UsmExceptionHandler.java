@@ -1,4 +1,4 @@
-package com.github.jusm.handler;
+package com.github.jusm.component;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

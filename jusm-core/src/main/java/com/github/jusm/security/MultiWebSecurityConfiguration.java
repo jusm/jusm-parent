@@ -87,7 +87,6 @@ import com.github.jusm.service.ParameterService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(Ordered.HIGHEST_PRECEDENCE + 100)
 public class MultiWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
 	// ~ Instance fields
 	// ================================================================================================
 

@@ -22,7 +22,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -33,8 +32,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.github.jusm.handler.UsmErrorAttributes;
+import com.github.jusm.component.SpringContextHolder;
+import com.github.jusm.component.UsmErrorAttributes;
 import com.github.jusm.hystrix.UsmHystrixCommandWapper;
+import com.github.jusm.redis.RedisConfig;
 import com.github.jusm.security.AntPatternProperties;
 import com.github.jusm.security.CorsProperties;
 import com.github.jusm.security.CurrentUser;
@@ -42,7 +43,6 @@ import com.github.jusm.security.MultiWebSecurityConfiguration;
 import com.github.jusm.security.SwaggerProperties;
 import com.github.jusm.security.UsmContextVariables;
 import com.github.jusm.service.ParameterService;
-import com.github.jusm.util.SpringContextHolder;
 import com.github.jusm.web.UsmLocaleResolver;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import com.ning.http.client.AsyncHttpClient;
@@ -61,14 +61,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ConditionalOnWebApplication
 @AutoConfigureAfter({ WebMvcAutoConfiguration.class })
 @EnableConfigurationProperties(UsmProperties.class)
-@ImportAutoConfiguration(MultiWebSecurityConfiguration.class)
+@ImportAutoConfiguration(value={MultiWebSecurityConfiguration.class,RedisConfig.class,ComponentScanConfig.class})
 @EnableCaching
 @EnableSwagger2
-@ComponentScan(basePackages= {"com.github.jusm.service","com.github.jusm.controller","com.github.jusm.redis","com.github.jusm.handler"})
-@EntityScan(basePackages="com.github.jusm.entities")
-@EnableJpaRepositories(basePackages = {
-        "com.github.jusm.repository" }, repositoryFactoryBeanClass = JpaRepositoryFactoryBean.class)
 public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
+	@Bean
+	public SpringContextHolder springContextHolder() {
+		return new SpringContextHolder();
+	}
 	
 	@Bean
 	public UsmHystrixCommandWapper initUsmHystrixRpcWrapper() {
@@ -94,11 +94,6 @@ public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
 		this.antPatternProperties = usmProperties.getAntPattern();
 	}
 
-	@Bean
-	public SpringContextHolder springContextHolder() {
-		return new SpringContextHolder();
-	}
-	
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new UsmLocaleResolver();

@@ -1,5 +1,6 @@
 package com.github.jusm.model;
 
+
 public enum ReturnCode {
 //	↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓正确的错误码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	SUCCESS(true, 1, "成功"),
@@ -16,14 +17,23 @@ public enum ReturnCode {
 	
 	OPER_FAILTURE(false, 5000, "操作失败"),
 	
+	TIMEOUT_ERROR(false, 9972, "第三方服务响应超时"),
 	
+	NEED_BIND_PHONENUMBER(false, 9973, "请绑定手机号"),
 	
+	UNSUPPORT_PRINTING(false, 9974, "该下单码不支持直接打印"),
 	
-	TOKEN_VALID_FAILED(false, 9978, "无效的Token"),
+	NEED_ID_CARD(false, 9975, "需要您实名认证"),
+	
+	NOT_EXIST_PRINT_NUMBER(false, 9976, "您扫描的打印码不存在或已被删除"),
+	
+	VALID_ERROR_BY_CONFIG(false, 9977, "包裹订单的数据与打印码里的信息不一致"),
+	
+	TOKEN_VALID_FAILED(false, 9978, "无效的令牌"),
 	
 	WXCXX_NO_SIGN_IN(false, 9979, "微信小程序未登录"),
 	
-	NEED_APP_TOKEN(false, 9980, "请求需携带用户token!"),
+	NEED_APP_TOKEN(false, 9980, "请求头需携带用户令牌!"),
 	
 	ILLEGAL_APPNUMBER_ERROR(false, 9981, "不存在的应用编码!"),
 	
@@ -41,7 +51,7 @@ public enum ReturnCode {
 
 	FILE_FORMAT_ERROR(false, 9988, "文件格式错误"),
 
-	JSON_ERROR(false, 9989, "Json数据格式错误"),
+	JSON_ERROR(false, 9989, "JSON数据格式错误"),
 
 	AUTH_ERROR(false, 9990, "鉴权失败"),
 
@@ -53,13 +63,13 @@ public enum ReturnCode {
 
 	NO_EXIST_ERROR(false, 9994, "不存在的记录"),
 
-	TOKEN_ERROR(false, 9995, "Token失效"),
+	TOKEN_ERROR(false, 9995, "令牌失效"),
 
 	REPEAT_ERROR(false, 9996, "已存在的记录"),
 
 	VALID_ERROR(false, 9997, "参数校验失败"),
 
-	USM_ERROR(false, 9998, "系统异常,请联系管理员"),
+	KYE_API_EXCEPTION(false, 9998, "跨越开放平台异常,请联系开放平台管理员"),
 
 	UNKNOW_ERROR(false, 9999, "未知异常,请联系管理员");
 

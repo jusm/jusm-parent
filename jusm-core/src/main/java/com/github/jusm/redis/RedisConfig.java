@@ -3,6 +3,8 @@ package com.github.jusm.redis;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
@@ -18,7 +20,10 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import com.github.jusm.autoconfigure.UsmAutoConfiguration;
+
 @EnableCaching
+@AutoConfigureAfter({ UsmAutoConfiguration.class })
 public class RedisConfig {
 
 	@Autowired

@@ -506,4 +506,12 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByPhonenumber(phonenumber);
 	}
 
+	@Override
+	public void createUser(String username, String password, String email, String phonenumber) {
+		User user = User.withUsername(username).password(password).build();
+		user.setEmail(email);
+		user.setPhonenumber(phonenumber);
+		User save = userRepository.save(user);
+	}
+
 }

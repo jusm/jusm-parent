@@ -1,12 +1,14 @@
-package com.github.jusm.util;
+package com.github.jusm.component;
 import java.util.Map;  
   
 import org.springframework.beans.MutablePropertyValues;  
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;  
 import org.springframework.beans.factory.support.GenericBeanDefinition;  
 import org.springframework.context.ApplicationContext;  
-import org.springframework.context.ApplicationContextAware;  
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;  
   
+@Component
 public class SpringContextHolder implements ApplicationContextAware {  
       
     private static ApplicationContext applicationContext;  

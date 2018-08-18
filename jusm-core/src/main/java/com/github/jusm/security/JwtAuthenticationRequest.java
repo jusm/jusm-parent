@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "用户信息", description = "JWT用户登录认证")
-class JwtAuthenticationRequest implements Serializable {
+public class JwtAuthenticationRequest implements Serializable {
 
 	private static final long serialVersionUID = -8445943548965154778L;
 

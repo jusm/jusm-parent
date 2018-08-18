@@ -12,6 +12,9 @@ import com.github.jusm.entities.User;
 public interface UserService {
 
 	boolean createRootUser(String password, String email, String phonenumber);
+	
+	
+	void createUser(String username, String password, String email, String phonenumber);
 
 	User findByUsername(String username);
 

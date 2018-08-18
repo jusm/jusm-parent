@@ -10,9 +10,9 @@ import java.util.Set;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Component;
 
+import com.github.jusm.component.SpringContextHolder;
 import com.github.jusm.security.UsmContext;
 import com.github.jusm.util.CopyOnWriteMap;
-import com.github.jusm.util.SpringContextHolder;
 
 
 @Component

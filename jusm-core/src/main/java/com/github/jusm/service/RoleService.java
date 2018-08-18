@@ -12,6 +12,9 @@ public interface RoleService {
 	 */
 	List<Role> findAll();
 	
-	
-	Role newAdd(Role role);
+	Role findByName(String string);
+
+	Role findByAuthority(String authority);
+
+	Role save(Role role);
 }

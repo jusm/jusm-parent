@@ -2,7 +2,7 @@ package com.github.jusm.security;
 
 public class SwaggerProperties {
 	
-	private String scanPackage="com";
+	private String scanPackage="com.kye";
 
 	private String title = "统一系统管理接口";
 
