@@ -23,9 +23,10 @@ import com.github.jusm.service.ParameterService;
 import com.github.jusm.service.PermissionService;
 import com.github.jusm.service.UserService;
 import com.github.jusm.util.Conts;
+import com.github.jusm.web.ConsoleController;
 
 @Controller
-public class ConsoleController {
+public class BasicConsoleController implements ConsoleController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -44,7 +45,7 @@ public class ConsoleController {
 		// 初始化菜单数据
 		List<Permission> treeMenus = permissionService.treeMenus(authorities);
 		session.setAttribute("menus", treeMenus);
-		return "console";
+		return getConsolePath();
 	}
 
 	/**
@@ -90,5 +91,11 @@ public class ConsoleController {
 	@RequestMapping(value = { "index", "/" })
 	public String index() {
 		return "index";
+	}
+
+	@Override
+	public String getConsolePath() {
+		// nothing to do
+		return "console";
 	}
 }

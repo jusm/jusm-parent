@@ -18,6 +18,8 @@
 	</modules>
 
 	<properties>
+		<spring.boot.version>1.5.14.RELEASE</spring.boot.version>
+
 		<jusm.version>0.0.1-SNAPSHOT</jusm.version>
 		<velocity.version>1.7</velocity.version>
 		<commons.lang.version>2.6</commons.lang.version>
@@ -39,6 +41,22 @@
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
 	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.thymeleaf</groupId>
+				<artifactId>thymeleaf</artifactId>
+				<version>${thymeleaf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nz.net.ultraq.thymeleaf</groupId>
+				<artifactId>thymeleaf-layout-dialect</artifactId>
+				<version>${thymeleaf-layout-dialect.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

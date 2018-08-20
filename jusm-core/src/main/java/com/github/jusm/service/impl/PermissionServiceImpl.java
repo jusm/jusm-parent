@@ -13,13 +13,14 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.github.jusm.cache.UsmCacheNames;
 import com.github.jusm.entities.Permission;
 import com.github.jusm.entities.Role;
 import com.github.jusm.repository.PermissionRepository;
 import com.github.jusm.service.PermissionService;
 
 @Service
-@CacheConfig(cacheNames = "usm.permission")
+@CacheConfig(cacheNames = UsmCacheNames.PERMISSION)
 public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
@@ -31,7 +32,7 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	@Cacheable(cacheNames="usm.permission",unless="#result == null")
+	@Cacheable(unless="#result == null")
 	public List<Permission> treeMenus() {
 		return permissionRepository.findFirstLevelByType(Permission.Type.MENU);
 	}
@@ -40,13 +41,13 @@ public class PermissionServiceImpl implements PermissionService {
 	 * 只支持两级菜单
 	 */
 	@Override
-	@Cacheable(cacheNames="usm.permission",unless="#result == null")
+	@Cacheable(unless="#result == null || #result.size() == 0")
 	public List<Permission> treeMenus(String authority) {
 		return treeMenus(Arrays.asList(authority));
 	}
  
 	@Override
-	@Cacheable(cacheNames="usm.permission", unless="#result.size() == 0")
+	@Cacheable(unless="#result == null || #result.size() == 0")
 	public List<Permission> treeMenus(Collection<String> authorities) {
 		List<Permission> permissions = permissionRepository.findFirstLevelByType(Permission.Type.MENU);
 		recursionProcessing(authorities, permissions);

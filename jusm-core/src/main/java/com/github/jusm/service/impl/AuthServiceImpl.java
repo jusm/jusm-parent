@@ -29,7 +29,6 @@ import com.github.jusm.exception.AuthException;
 import com.github.jusm.exception.RepeatException;
 import com.github.jusm.model.R;
 import com.github.jusm.model.ReturnCode;
-import com.github.jusm.redis.RedisUtil;
 import com.github.jusm.security.JwtTokenHandler;
 import com.github.jusm.service.AuthService;
 import com.github.jusm.service.GroupService;
@@ -50,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	public AuthServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
-			JwtTokenHandler jwtTokenHandler, UserService userService, RoleService roleService,GroupService groupService,PasswordEncoder passwordEncoder,RedisUtil redisUtil) {
+			JwtTokenHandler jwtTokenHandler, UserService userService, RoleService roleService,GroupService groupService,PasswordEncoder passwordEncoder) {
 		this.authenticationManager = authenticationManager;
 		this.userDetailsService = userDetailsService;
 		this.jwtTokenHandler = jwtTokenHandler;

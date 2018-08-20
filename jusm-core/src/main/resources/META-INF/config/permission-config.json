@@ -181,7 +181,7 @@
 				"icon": "fa fa-link",
 				"name": "菜单管理",
 				"number": "p_1_4",
-				"uri": "/menus/menu.html",
+				"uri": "/menu.html",
 				"httpMethod": null,
 				"type": "MENU",
 				"description": "描述暂无",

@@ -10,6 +10,7 @@
 	<name>jusm-webapp-jar</name>
 	<description>jar包启动</description>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github</groupId>
@@ -17,19 +18,12 @@
 			<version>${jusm.version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- 默认在package阶段执行 -->
-				<!-- <executions> -->
-				<!-- <execution> -->
-				<!-- <phase>install</phase> -->
-				<!-- </execution> -->
-				<!-- </executions> -->
 			</plugin>
 		</plugins>
 	</build>
