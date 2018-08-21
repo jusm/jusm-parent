@@ -1,5 +1,7 @@
 package com.github.jusm.autoconfigure;
 
+import java.text.DateFormat;
+
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 
@@ -19,6 +21,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -29,7 +33,9 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jusm.component.SpringContextHolder;
+import com.github.jusm.component.UsmDateFormat;
 import com.github.jusm.component.UsmErrorAttributes;
 import com.github.jusm.hystrix.UsmHystrixCommandWapper;
 import com.github.jusm.redis.RedisConfig;
@@ -66,6 +72,20 @@ public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
 	public SpringContextHolder springContextHolder() {
 		return new SpringContextHolder();
 	}
+	
+//	@Bean
+	public MappingJackson2HttpMessageConverter mappingJsonpHttpMessageConverter(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
+ 
+		ObjectMapper mapper = jackson2ObjectMapperBuilder.build();
+		// ObjectMapper为了保障线程安全性，里面的配置类都是一个不可变的对象
+		// 所以这里的setDateFormat的内部原理其实是创建了一个新的配置类
+		DateFormat dateFormat = mapper.getDateFormat();
+		mapper.setDateFormat(new UsmDateFormat(dateFormat));
+		MappingJackson2HttpMessageConverter mappingJsonpHttpMessageConverter = new MappingJackson2HttpMessageConverter(mapper);
+		return mappingJsonpHttpMessageConverter;
+	}
+
+	
 	
 	@Bean
 	public UsmHystrixCommandWapper initUsmHystrixRpcWrapper() {
