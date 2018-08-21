@@ -42,6 +42,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.github.jusm.autoconfigure.UsmAutoConfiguration;
+import com.github.jusm.autoconfigure.UsmBeansConfig;
 import com.github.jusm.autoconfigure.UsmProperties;
 import com.github.jusm.repository.PermissionRepository;
 import com.github.jusm.repository.RoleRepository;
@@ -80,7 +81,7 @@ import com.github.jusm.service.ParameterService;
  */
 @Configuration
 @ConditionalOnWebApplication
-@AutoConfigureAfter(UsmAutoConfiguration.class)
+@AutoConfigureAfter(UsmBeansConfig.class)
 @EnableConfigurationProperties({ UsmProperties.class })
 @ConditionalOnClass({ WebMvcAutoConfiguration.class })
 @EnableWebSecurity

@@ -114,9 +114,8 @@ public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
 		};
 	}
 
-
 	@Bean
-	@DependsOn()
+	@DependsOn("parameterService")
 	public UsmContextVariables usmContextVariables() {
 		return new UsmContextVariables(servletContext, antPatternProperties, usmProperties, parameterService,
 				serverProperties);
@@ -133,7 +132,7 @@ public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MultipartConfigElement multipartConfigElement() {
 		MultipartConfigFactory factory = new MultipartConfigFactory();
-		factory.setLocation("/tmp");
+		factory.setLocation("/USM-Data/upload");
 		return factory.createMultipartConfig();
 	}
 

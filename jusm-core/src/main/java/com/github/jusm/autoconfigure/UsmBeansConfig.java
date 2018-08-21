@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,38 +39,42 @@ import com.github.jusm.web.ConsoleController;
 
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class })
 @ConditionalOnWebApplication
-@AutoConfigureBefore(UsmAutoConfiguration.class)
+@AutoConfigureBefore(WebMvcAutoConfiguration.class)
 @Configuration
 @EntityScan(basePackages = "com.github.jusm.entities")
 @EnableJpaRepositories(basePackages = { "com.github.jusm.repository" })
 public class UsmBeansConfig {
 	
-	
+	@Bean
+	@ConditionalOnMissingBean
+	public ParameterService parameterService(){
+		return new ParameterServiceImpl();
+	}
+	@Bean
 	@ConditionalOnMissingBean(value = LogoutService.class)
 	public LogoutService logoutService(){
 		return new LogoutServiceImpl();
 	}
 	
-	@ConditionalOnMissingBean(value = ParameterService.class)
-	public ParameterService parameterService(){
-		return new ParameterServiceImpl();
-	}
-	
+	@Bean
 	@ConditionalOnMissingBean(value = PermissionService.class)
 	public PermissionService permissionService(){
 		return new PermissionServiceImpl();
 	}
 	
+	@Bean
 	@ConditionalOnMissingBean(value = RoleService.class)
 	public RoleService roleService(){
 		return new RoleServiceImpl();
 	}
 	
+	@Bean
 	@ConditionalOnMissingBean(value = GroupService.class)
 	public GroupService groupService(){
 		return new GroupServiceImpl();
 	}
 	
+	@Bean
 	@ConditionalOnMissingBean(value = AuthService.class)
 	public AuthService authService(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
 			JwtTokenHandler jwtTokenHandler, UserService userService, RoleService roleService,GroupService groupService,PasswordEncoder passwordEncoder){
@@ -76,26 +82,31 @@ public class UsmBeansConfig {
 				jwtTokenHandler,  userService, roleService, groupService, passwordEncoder);
 	}
 
+	@Bean
 	@ConditionalOnMissingBean(value = UserService.class)
 	public UserService userService() {
 		return new UserServiceImpl();
 	}
 
+	@Bean
 	@ConditionalOnMissingBean(value = AuthController.class)
 	public AuthController authController() {
 		return new AuthController();
 	}
 
+	@Bean
 	@ConditionalOnMissingBean(value = ConsoleController.class)
 	public BasicConsoleController basicConsoleController() {
 		return new BasicConsoleController();
 	}
 
+	@Bean
 	@ConditionalOnMissingBean(value = PermissionController.class)
 	public PermissionController permissionController() {
 		return new PermissionController();
 	}
 
+	@Bean
 	@ConditionalOnMissingBean(value = RoleController.class)
 	public RoleController roleController() {
 		return new RoleController();

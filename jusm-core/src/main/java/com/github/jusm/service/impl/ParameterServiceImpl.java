@@ -5,14 +5,12 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.stereotype.Service;
 
 import com.github.jusm.cache.UsmCacheNames;
 import com.github.jusm.entities.Parameter;
 import com.github.jusm.repository.ParameterRepository;
 import com.github.jusm.service.ParameterService;
 
-@Service
 @CacheConfig(cacheNames = UsmCacheNames.PARAMTER)
 public class ParameterServiceImpl implements ParameterService {
 
