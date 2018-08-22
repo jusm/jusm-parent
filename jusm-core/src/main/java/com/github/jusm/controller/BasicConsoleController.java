@@ -73,22 +73,22 @@ public class BasicConsoleController implements ConsoleController {
 
 	}
 
-	@RequestMapping(value = { "login" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { Conts.login }, method = { RequestMethod.GET })
 	public String login() {
 		return "login";
 	}
 
-	@RequestMapping(value = { "install" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { Conts.install }, method = { RequestMethod.GET })
 	public String install() {
 		return "install";
 	}
 
-	@RequestMapping(value = { "register" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { Conts.register }, method = { RequestMethod.GET })
 	public String register() {
 		return "register";
 	}
 
-	@RequestMapping(value = { "index", "/" })
+	@RequestMapping(value = { Conts.default_page, "/" })
 	public String index() {
 		return "index";
 	}
