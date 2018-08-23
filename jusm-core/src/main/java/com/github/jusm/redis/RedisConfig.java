@@ -25,15 +25,18 @@ import redis.clients.jedis.Jedis;
 @ConditionalOnClass({ JedisConnection.class, RedisOperations.class, Jedis.class })
 public class RedisConfig {
 	
+	@Bean
+	@ConditionalOnProperty(name = "usm.cache.flush", havingValue = "true",matchIfMissing=true)
+	public FlushRedisJob flushRedis() {
+		return new FlushRedisJob();
+	}
+	
 	@Configuration
 	//原Boot的server.session.timeout属性不再生效。
 	@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)//session过期时间  如果部署多机环境,需要打开注释
 	@ConditionalOnProperty(name = "spring.session.store-type", havingValue = "redis",matchIfMissing=false)
 	public class RedisHttpSessionConfig {
-		
-		
 	}
-	
 	 /**
      * redisTemplate 序列化使用的jdkSerializeable, 存储二进制字节码, 所以自定义序列化类
      * @param redisConnectionFactory

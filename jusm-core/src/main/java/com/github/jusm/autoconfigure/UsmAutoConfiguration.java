@@ -38,7 +38,6 @@ import com.github.jusm.component.SpringContextHolder;
 import com.github.jusm.component.UsmDateFormat;
 import com.github.jusm.component.UsmErrorAttributes;
 import com.github.jusm.hystrix.UsmHystrixCommandWapper;
-import com.github.jusm.redis.FlushRedis;
 import com.github.jusm.redis.RedisConfig;
 import com.github.jusm.security.AntPatternProperties;
 import com.github.jusm.security.CorsProperties;
@@ -70,11 +69,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class UsmAutoConfiguration extends WebMvcConfigurerAdapter {
 	
-	@Bean
-	@ConditionalOnProperty(name = "usm.cache.flush", havingValue = "true",matchIfMissing=true)
-	public FlushRedis flushRedis() {
-		return new FlushRedis();
-	}
 	
 	@Bean
 	public SpringContextHolder springContextHolder() {

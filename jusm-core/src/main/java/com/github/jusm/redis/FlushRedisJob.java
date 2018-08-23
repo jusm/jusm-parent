@@ -10,17 +10,17 @@ import com.github.jusm.listener.StartupApplicationListener.StartupJob;
 /**
  * 清除redis缓存
  */
-public class FlushRedis implements StartupJob {
+public class FlushRedisJob implements StartupJob {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private RedisService redisService;
+	private RedisTemplateFacade redisTemplateFacade;
 
 	@Override
 	public void run(ContextRefreshedEvent event) {
 		logger.info("即将清除redis数据");
-		String flushDB = redisService.flushDB();
+		String flushDB = redisTemplateFacade.flushDB();
 		logger.info(flushDB);
 	}
 
