@@ -7,14 +7,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-@Component
 public class RedisTemplateFacade {
 	
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 	
 	@Autowired
-	private RedisTemplate redisTemplate;
+	private RedisTemplate<Object, Object> redisTemplate;
 	
 	
 	public long add(String key,String value,long exipre) {

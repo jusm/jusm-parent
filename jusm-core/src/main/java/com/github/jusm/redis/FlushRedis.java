@@ -4,12 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
 import com.github.jusm.listener.StartupApplicationListener.StartupJob;
 
-@Component
-public class FlashDB implements StartupJob {
+/**
+ * 清除redis缓存
+ */
+public class FlushRedis implements StartupJob {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
