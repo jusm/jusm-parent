@@ -1,6 +1,7 @@
 package com.github.jusm.autoconfigure;
 
 import java.io.File;
+import java.util.Map;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.MultipartConfigElement;
@@ -399,15 +400,16 @@ public class UsmAutoConfiguration extends WebSecurityConfigurerAdapter {
 		@Autowired
 		private ServiceModelToSwagger2Mapper mapper;
 
-		@Bean
-		public Swagger swagger() {
-			String groupName = Optional.fromNullable((String) null).or(Docket.DEFAULT_GROUP_NAME);
-			Documentation documentation = documentationCache.documentationByGroup(groupName);
-			if (documentation == null) {
-				return null;
-			}
-			return mapper.mapDocumentation(documentation);
-		}
+//		@Bean
+//		public Swagger swagger() {
+//			String groupName = Optional.fromNullable((String) null).or(Docket.DEFAULT_GROUP_NAME);
+//			Documentation documentation = documentationCache.documentationByGroup(groupName);
+//			Map<String, Documentation> all = documentationCache.all();
+//			if (documentation == null) {
+//				return null;
+//			}
+//			return mapper.mapDocumentation(documentation);
+//		}
 
 		@Bean
 		public Docket createRestApi(Contact contact, UsmProperties usmProperties) {

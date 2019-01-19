@@ -304,8 +304,8 @@ public class UsmContext implements StartupApplicationListener.StartupJob {
 
 	@Override
 	public void run(ContextRefreshedEvent event) {
-		Swagger swagger = SpringContextHolder.getBean(Swagger.class);
-		servletContext.setAttribute(Conts.USM_CONTEXT_API_COUNT, swagger.getPaths().size());
+//		Swagger swagger = SpringContextHolder.getBean(Swagger.class);
+//		servletContext.setAttribute(Conts.USM_CONTEXT_API_COUNT, swagger.getPaths().size());
 	}
 
 	public static final Locale LOCALE = Locale.getDefault();
