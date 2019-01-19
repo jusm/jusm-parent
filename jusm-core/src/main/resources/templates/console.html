@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title th:text="${application.fullname} +' | 控制台'"></title>
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -30,18 +32,20 @@
 				</ol>
 			</section>
 			<section class="content container-fluid">
+			
 			<div class="row">
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="info-box bg-aqua">
 					<span class="info-box-icon"><i class="fa fa-tachometer"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">服务节点</span> <span class="info-box-number"> <span th:text="${nodeCount}">0</span>
+						<span class="info-box-text">redis客户端连接数</span> <span class="info-box-number"> <span th:text="${redisClient}">0</span>
 							<small>个</small>
 						</span>
 						<div class="progress">
-							<div class="progress-bar" th:style="'width: ' + ${totalRate} + '%'"></div>
-						</div>
-						<span class="progress-description" th:text="'服务节点健康值 ' + ${totalRate} + '%'">短网址总使用率 100.00%</span>
+								<div class="progress-bar"
+										th:style="'width: ' + ${totalRate} + '%'"></div>
+								</div>
+						<span class="progress-description" th:text="'redis客户端连接数使用率' + ${totalRate} + '%'">redis客户端连接数使用率 100.00%</span>
 					</div>
 				</div>
 			</div>
@@ -49,13 +53,13 @@
 				<div class="info-box bg-red">
 					<span class="info-box-icon"><i class="fa fa-bar-chart"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">API 调用次数</span> <span class="info-box-number"> <span th:text="${callTotal}">0</span>
-							<small>次</small>
+						<span class="info-box-text">内存使用</span> <span class="info-box-number"> <span th:text="${usedPhysicalMemory}">10</span>
+							<small>MB</small>
 						</span>
 						<div class="progress">
-							<div class="progress-bar" th:style="'width: ' + ${successRate} + '%'"></div>
+							<div class="progress-bar" th:style="'width: ' + ${usedPhysicalMemoryRate} + '%'"></div>
 						</div>
-						<span class="progress-description" th:text="'API调用成功率  ' + ${successRate} + '%'">API调用成功率 90%</span>
+						<span class="progress-description" th:text="'内存使用率  ' + ${usedPhysicalMemoryRate} + '%'">内存使用率 90%</span>
 					</div>
 				</div>
 			</div>
@@ -63,7 +67,7 @@
 				<div class="info-box bg-yellow">
 					<span class="info-box-icon "><i class="fa fa-tags"></i></span>
 					<div class="info-box-content">
-						<span class="info-box-text">API模块数</span> <span class="info-box-number"> <span th:text="${tagsCount}">0</span>
+						<span class="info-box-text">maxTotal</span> <span class="info-box-number"> <span th:text="${maxTotal}">0</span>
 							<small>个</small>
 						</span>
 						<div class="progress">
@@ -226,7 +230,7 @@
 		<div class="col-md-8">
 		<div class="box box-info ">
             <div class="box-header with-border">
-              <h3 class="box-title">Latest Orders</h3>
+              <h3 class="box-title">系统参数</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -240,10 +244,10 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Order ID</th>
-                    <th>Item</th>
-                    <th>Status</th>
-                    <th>Popularity</th>
+                    <th>键</th>
+                    <th>值</th>
+                    <th>s</th>
+                    <th>描述</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -381,5 +385,6 @@
 	<script src="js/Chart.min.js"></script>
 	<script src="js/dashboard2.js"></script>
 	<script th:src="@{/js/demo.js}"></script>
+	<script type="text/javascript"th:src="@{/js/console.js}"></script>
 </body>
 </html>

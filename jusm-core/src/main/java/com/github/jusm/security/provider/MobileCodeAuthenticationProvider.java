@@ -12,7 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.github.jusm.entities.User;
+import com.github.jusm.entity.User;
 import com.github.jusm.security.service.MobileCodeService;
 import com.github.jusm.security.token.MobileCodeAuthenticationToken;
 import com.github.jusm.service.UserService;

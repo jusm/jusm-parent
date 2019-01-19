@@ -44,9 +44,6 @@ public class UsmLoginFilter extends OncePerRequestFilter {
 	 */
 	private String contextPath;
 
-	@Value("${server.ssl.enabled:false}")
-	private boolean enabled;
-
 	private RequestMatcher loginPageRequestMatcher;
 
 	public UsmLoginFilter(boolean verificationCode, int loginFailureTimes, String loginPath) {

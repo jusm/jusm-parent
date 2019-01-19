@@ -9,5 +9,8 @@ public final class UsmCacheNames {
 	
 	
 	public static final String PERMISSION = CACHE_NAME_PREFIX + "permission";	
+	
+	
+	public static final String USER = CACHE_NAME_PREFIX + "user";	
 	 
 }

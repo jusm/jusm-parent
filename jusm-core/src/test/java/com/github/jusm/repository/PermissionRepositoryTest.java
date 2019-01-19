@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.github.jusm.entities.Permission;
-import com.github.jusm.entities.Permission.Type;
+import com.github.jusm.entity.Permission;
+import com.github.jusm.entity.Permission.Type;
 
 
 @SpringBootTest

@@ -1,5 +1,7 @@
 package com.github.jusm.domain;
 
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.github.jusm.validation.constraints.Matches;
@@ -9,18 +11,23 @@ message = "{constraint.confirmNewPassword.not.match.newPassword}")
 public class RegisterDO {
 	
 	@NotBlank(message="用户名必填")
+	@Size(min=1,max=20,message="{items.name.length.error}")
 	private  String username;
 	
 	@NotBlank(message="密码必填")
+	@Size(min=1,max=20,message="{items.name.length.error}")
 	private  String password;
 	
 	@NotBlank(message="确认密码必填")
+	@Size(min=1,max=20,message="{items.name.length.error}")
 	private  String confirmPassword;
 	
 	@NotBlank(message="电子邮箱必填")
+	@Size(min=1,max=20,message="{items.name.length.error}")
 	private String email;
 	
 	@NotBlank(message="手机号码必填")
+	@Size(min=1,max=20,message="{items.name.length.error}")
 	private String phonenumber;
 
 	public String getUsername() {

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title th:text="${application.fullname} +' | 控制台'"></title>
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/AdminLTE.min.css">
+<!-- <link rel="stylesheet" href="css/skin-blue.min.css"> -->
+<link rel="stylesheet" href="css/_all-skins.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+	<div class="wrapper">
+		<div th:replace="commons/header :: main-header(${application})"></div>
+		<div th:replace="commons/asider :: main-sidebar(${session},'p_4_1')"></div>
+		<div class="content-wrapper">
+			<section class="content-header"
+				th:replace="commons/content :: content-header('系统配置','系统配置查看')">
+			</section>
+			<section class="content">
+
+
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">系统参数列表</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body no-padding">
+						<table class="table no-margin">
+							<tbody>
+								<tr>
+									<th style="width: 15px">#</th>
+									<th>参数键</th>
+									<th>参数值</th>
+									<th>参数描述</th>
+								</tr>
+
+								<tr th:each="item : ${parameters}">
+
+									<td th:text="${item.id}">1.</td>
+									<td th:text="${item.paramKey}">system_data_install</td>
+									<td th:text="${item.paramValue}">2019-01-01</td>
+									<td th:text="${item.paramDesc}">系统初始换时间</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- 				 	 <div class="row"> -->
+				<!--         <div class="col-xs-12"> -->
+				<!--           <div class="box box-default"> -->
+				<!--             <div class="box-header with-border"> -->
+				<!--               <h3 class="box-title">日志级别</h3>[[${EffectiveLevel}]][[${ConfiguredLevel}]] -->
+				<!--             </div> -->
+				<!--             <div class="box-body"> -->
+				<!--               <div class="btn-group"> -->
+				<!--               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default"> -->
+				<!--                 DEBUG -->
+				<!--               </button> -->
+				<!--               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info"> -->
+				<!--                 INFO -->
+				<!--               </button> -->
+				<!--               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-warning"> -->
+				<!--                 WARN -->
+				<!--               </button> -->
+				<!--                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger"> -->
+				<!--                 ERROR -->
+				<!--               </button> -->
+				<!--               </div> -->
+				<!--             </div> -->
+				<!--           </div> -->
+				<!--         </div> -->
+				<!--       </div> -->
+
+				<div class="modal fade" id="modal-default">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">系统信息</h4>
+							</div>
+							<div class="modal-body">
+								<p>确定修改日志级别为DEBUG吗?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default pull-left"
+									data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal"
+									onclick="ProfilesHandler.changeLoggerLevel('DEBUG')">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal modal-info fade" id="modal-info">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">系统信息</h4>
+							</div>
+							<div class="modal-body">
+								<p>确定修改日志级别为INFO吗?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline pull-left"
+									data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-outline"
+									data-dismiss="modal"
+									onclick="ProfilesHandler.changeLoggerLevel('INFO')">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal modal-warning fade" id="modal-warning">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">系统信息</h4>
+							</div>
+							<div class="modal-body">
+								<p>确定修改日志级别为WARN吗?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline pull-left"
+									data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-outline"
+									data-dismiss="modal"
+									onclick="ProfilesHandler.changeLoggerLevel('WARN')">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal modal-danger fade" id="modal-danger">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">系统信息</h4>
+							</div>
+							<div class="modal-body">
+								<p>确定修改日志级别为ERROR吗?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline pull-left"
+									data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-outline"
+									data-dismiss="modal"
+									onclick="ProfilesHandler.changeLoggerLevel('ERROR')">确定</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+
+
+
+
+			</section>
+		</div>
+
+		<div th:replace="commons/footer :: main-footer(${application})"></div>
+		<!-- 		<div th:replace="commons/setting :: control-sidebar(${application})"></div> -->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/adminlte.min.js}"></script>
+	<script th:src="@{/js/demo.js}"></script>
+	<script th:src="@{/js/bootstrap-table.min.js}"></script>
+	<script th:src="@{/js/jquery.treegrid.min.js}"></script>
+	<script th:src="@{/js/jquery.treegrid.bootstrap3.js}"></script>
+	<script th:src="@{/js/jquery.treegrid.extension.js}"></script>
+	<script th:src="@{/js/tree.table.js}"></script>
+	<script type="text/javascript" th:src="@{/js/profiles.js}"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<base href="<%=basePath%>">
+
+<title>视频播放</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+<!-- <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs.min.js"></script> -->
+</head>
+<body>
+	<video id="my_video_1" class="video-js vjs-default-skin" controls
+		preload="auto" width="640" height="480"
+		poster="jsp/video/video-js/my_video_poster.png" data-setup="{}">
+<!-- 		<source src="http://localhost:8080/local/TFPQ2327.mp4" type='video/mp4' /> -->
+		<source th:src="@{${#oss.select(1)}}" type='video/mp4' /> 
+		<!-- <source src="http://localhost:8080/ompa/uploads/file/bb.wmv" type='video/webm' /> -->
+	</video>
+	<script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+</body>
+</html>

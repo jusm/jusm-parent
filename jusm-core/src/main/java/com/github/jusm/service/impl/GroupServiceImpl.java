@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.jusm.entities.Group;
+import com.github.jusm.entity.Group;
 import com.github.jusm.exception.ReferenceException;
 import com.github.jusm.exception.RepeatException;
 import com.github.jusm.exception.ValidException;

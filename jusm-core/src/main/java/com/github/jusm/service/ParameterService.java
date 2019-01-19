@@ -1,6 +1,9 @@
 package com.github.jusm.service;
 
-import com.github.jusm.entities.Parameter;
+import java.util.Collection;
+import java.util.List;
+
+import com.github.jusm.entity.Parameter;
 
 
 public interface ParameterService {
@@ -20,8 +23,13 @@ public interface ParameterService {
 
 	/**
 	 * 保存系统参数
-	 * @param param
+	 * @param collection
 	 * @return
 	 */
-	Parameter save(Parameter param);
+	void save(Collection<Parameter> collection);
+	
+	
+	List<Parameter> findAll();
+	
+	public Parameter save(Parameter param);
 }

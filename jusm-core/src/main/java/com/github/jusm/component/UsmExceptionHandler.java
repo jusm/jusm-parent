@@ -16,11 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.github.jusm.entities.ApiLog;
+import com.github.jusm.autoconfigure.UsmProperties;
+import com.github.jusm.entity.ApiLog;
+import com.github.jusm.service.MailService;
 import com.github.jusm.util.AddressUtil;
 import com.github.jusm.util.IPUtil;
-import com.github.jusm.xxs.XssHttpServletRequestWrapper;
-
+import com.github.jusm.web.xxs.XssHttpServletRequestWrapper;
 
 /**
  * USM异常处理程序
@@ -30,12 +31,26 @@ public class UsmExceptionHandler {
 
 	private final Logger logger = LoggerFactory.getLogger(UsmExceptionHandler.class);
 
-//	@Autowired
-//	private MailUtil mailUtil;
+	@Autowired
+	private MailService mailService;
+
+	@Autowired
+	private UsmProperties usmProperties;
 
 	@ExceptionHandler(value = Exception.class)
 	public String errorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
-		handler(request, e);
+		if (usmProperties.isAlarm()) {
+			handler(request, e);
+		} else {
+			String authorization = request.getHeader("Authorization");
+			logger.error(String.format("Authorization:\n %s", authorization));
+			if (request != null && request instanceof XssHttpServletRequestWrapper) {
+				XssHttpServletRequestWrapper xsrw = (XssHttpServletRequestWrapper) request;
+				String originalBody = xsrw.getOriginalBody();
+				logger.error(String.format("入参:\n %s", originalBody));
+			}
+			logger.error("API Failed： ", e);
+		}
 		request.setAttribute("javax.servlet.error.exception", e);
 		return "forward:/error";
 	}
@@ -82,19 +97,14 @@ public class UsmExceptionHandler {
 							if (log.getException() != null) {
 								trakeError = printStackTraceToString(log.getException());
 							}
-							String mailSubject = "《接口故障监控报警》(WEB服务接口平台USM)";
+							String mailSubject = "《接口监控报警》";
 							String mailBody = MessageFormat.format(
 									"请求IP:{0} \n 请求地址: {1}\n  入参: \n {2}\n  Authorization: \n {3} \n  服务器IP地址:{4}\n  请求时间:{5}\n  异常堆栈:\n{6}",
 									log.getRequestIP(), log.getRequestUrl(), log.getParams(), log.getToken(),
 									log.getServerIP(), log.getRequestTime(), trakeError);
-							logger.info("send mail");
-//							boolean success = mailUtil.sendMail(null, mailSubject, mailBody, false, null);
-//							if(!success) {
-//								logger.info("send mail failed");
-//							}
+							mailService.sendSimpleMailMessage("262856298@qq.com", mailSubject, mailBody);
 						}
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 						logger.error("Send mail failed!", e);
 					}
 				}

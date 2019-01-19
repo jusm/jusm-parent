@@ -6,20 +6,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import com.github.jusm.entities.Group;
-import com.github.jusm.entities.Role;
-import com.github.jusm.entities.User;
+import com.github.jusm.entity.Group;
+import com.github.jusm.entity.Role;
+import com.github.jusm.entity.User;
 import com.github.jusm.repository.RoleRepository;
 import com.github.jusm.repository.UserRepository;
 
-
+/**
+ * 此类禁止使用缓存!!!!!!!!!!!!!!!!!!!!!!
+ * 
+ * @author haoran.wen
+ */
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
 	/**
@@ -28,7 +30,6 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 	protected UserRepository userRepository;
 
 	protected RoleRepository roleRepository;
-	
 
 	public JwtUserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
@@ -53,27 +54,22 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
 	/**
 	 * 提供一种从用户名可以查到用户并返回的方法
+	 * 
 	 * @param username
 	 *            帐号
 	 * @return UserDetails
 	 * @throws UsernameNotFoundException
 	 */
-
 	@Override
-	@Transactional
-	@Cacheable(cacheNames="usm.user",unless="#result == null")
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("此用户名不存在!");
 		}
-//		JwtUser userDetails = new JwtUser(user.getId(), username, user.getPassword(),
-//				AbstractEntity.Status.ENABLED.equals(user.getStatus()), true, true, true,
-//				grantedAuthorities(user.getId()), user.getEmail(),user.getLastPasswordResetDate(),user.getLastLoginTime());
-		return user;
+		JwtUser userDetails = JwtUserBuilder.builder(user);
+		return userDetails;
 	}
 
-	@Cacheable(cacheNames="usm.user",unless="#result == null")
 	protected Collection<Role> grantedAuthorities(String userId) {
 		final User user = userRepository.findOne(userId);
 		List<Role> allRoles = roleRepository.findAll();
@@ -91,7 +87,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 		}
 		Collection<Role> authorities = new HashSet<>();
 		roles.stream().filter(role -> role.isEnabled()).forEach((entity -> {
-//			authorities.add(new SimpleGrantedAuthority(entity.getNumber()));
+			// authorities.add(new SimpleGrantedAuthority(entity.getNumber()));
 			authorities.add(entity);
 		}));
 		return authorities;

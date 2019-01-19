@@ -1,0 +1,15 @@
+在Ubuntu系统中，使用非root用户开启tomcat时报错：
+java.net.SocketException: Permission denied
+
+at sun.nio.ch.Net.bind0(Native Method)
+
+at sun.nio.ch.Net.bind(Net.java:433)
+
+at sun.nio.ch.Net.bind(Net.java:425)
+
+原因：Ubuntu系统中，非root用户只能使用1024以上的端口。
+
+两个解决办法：
+
+使用root用户开启tomcat
+将端口设置为1024以上的端口：

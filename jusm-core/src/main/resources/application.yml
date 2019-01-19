@@ -1,6 +1,17 @@
 debug: true
+usm:
+  cors:
+    enabled: true
+  success-login-dispatcher-map:
+    role_admin: /console 
+    role_dba: /console
+    role_actuator: /console
+    role_caller: /swagger-ui.html
+    role_user: /console
+logging:
+  file: logs/jusm.log
 spring:
-  session:
+  session: 
     store-type: redis
   resources:
     cache-period: 604800
@@ -9,7 +20,7 @@ spring:
       cache: false
   jackson:
     time-zone: GMT+8
-#    date-format: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
   thymeleaf:
     cache: false
     mode: html
@@ -27,7 +38,7 @@ spring:
     schema: 
       - classpath:/META-INF/schema/schema-usm.sql
     data: 
-#      - classpath:/sql/data-usm.sql
+      - classpath:/META-INF/schema/data-usm.sql
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     druid: 
@@ -38,6 +49,9 @@ spring:
       max-active: 100
       min-idle: 10
       max-wait: 60000
+      logAbandoned: true
+      removeAbandoned: true
+      removeAbandonedTimeout: 1800
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20
       time-between-eviction-runs-millis: 60000
@@ -65,17 +79,19 @@ spring:
       timeout: 6000  # 连接超时时长（毫秒）
       pool:
           max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
-          max-wait: -1      # 连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-idle: 10      # 连接池中的最大空闲连接
-          min-idle: 5       # 连接池中的最小空闲连接
-usm:
-  swagger:
-    email: swagger-admin@master.com       
-  ant-pattern:
-    authorize-ant-patterns: "/api/**"    
-    rest-ant-pattern: "/api/**"    
-
+          max-wait: 20000      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-idle: 300      # 连接池中的最大空闲连接
+          min-idle: 100       # 连接池中的最小空闲连接
+  mail: 
+    host: smtp.163.com
+    username: 18565826287@163.com
+    password: wenhaoran163
+    properties:
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.port: 465
+      mail.smtp.auth: true
 mybatis: 
   config-location: classpath:mybatis/mybatis‐config.xml #指定全局配置文件的位置
   mapper-locations: classpath:mybatis/mapper/*.xml #指定sql映射文件的位置
- 

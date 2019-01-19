@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.github.jusm.entities.Group;
+import com.github.jusm.entity.Group;
 
 
 public interface GroupRepository extends JpaRepository<Group, String> {

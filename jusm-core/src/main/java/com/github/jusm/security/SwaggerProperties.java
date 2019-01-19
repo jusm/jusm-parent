@@ -1,20 +1,20 @@
 package com.github.jusm.security;
 
 public class SwaggerProperties {
-	
-	private String scanPackage="com";
+
+	private String scanPackage;
 
 	private String title = "统一系统管理接口";
 
-	private String description = "RESTful API Of USM";
+	private String description = "RESTful API Of Jusm";
 
 	private String termsOfServiceUrl = "/index.html";
 
-	private String version="1.0.0";
+	private String version = "1.0.0";
 
-	private String name="haoran_wen";
+	private String name = "jusmer";
 
-	private String email="3429293919@qq.com";
+	private String email = "jusmer@126.com";
 
 	public String getScanPackage() {
 		return scanPackage;
@@ -71,7 +71,5 @@ public class SwaggerProperties {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
+
 }

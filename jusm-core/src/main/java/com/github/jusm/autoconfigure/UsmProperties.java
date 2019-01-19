@@ -8,38 +8,53 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import com.github.jusm.security.AntPatternProperties;
-import com.github.jusm.security.CorsProperties;
 import com.github.jusm.security.JwtProperties;
 import com.github.jusm.security.SwaggerProperties;
 import com.github.jusm.util.Conts;
+import com.github.jusm.web.cors.CorsProperties;
 
 /**
  * 统一系统管理配置属性
  */
 @ConfigurationProperties(prefix = "usm", ignoreUnknownFields = true)
 public class UsmProperties {
-	
+
 	private String root = Conts.DEFAULT_SUPER_ADMIN_USERNAME;
-	
+
 	private String email = Conts.DEFAULT_SUPER_ADMIN_EMAIL;
-	
-	
+
+	private Map<String, String> successLoginDispatcherMap = new HashMap<>();
+
+	@Value("${usm.alarm:false}")
+	private boolean alarm;
+
+	public Map<String, String> getSuccessLoginDispatcherMap() {
+		return successLoginDispatcherMap;
+	}
+
+	public void setSuccessLoginDispatcherMap(Map<String, String> successLoginDispatcherMap) {
+		this.successLoginDispatcherMap = successLoginDispatcherMap;
+	}
+
+	@Value("${spring.profiles.active:dev}")
+	private String activeProfile;
+
 	@NestedConfigurationProperty
 	private SwaggerProperties swagger = new SwaggerProperties();
 
 	@NestedConfigurationProperty
 	private AntPatternProperties antPattern = new AntPatternProperties();
-	
+
 	@NestedConfigurationProperty
 	private CorsProperties cors = new CorsProperties();
-	
+
 	public CorsProperties getCors() {
 		return cors;
 	}
 
 	@NestedConfigurationProperty
 	private JwtProperties jwt = new JwtProperties();
-	
+
 	public SwaggerProperties getSwagger() {
 		return swagger;
 	}
@@ -68,23 +83,53 @@ public class UsmProperties {
 
 	@Value("${usm.title.shortname:USM}")
 	private String shortname;
-	
-	/**
-	 * USM 包之外的资源目录
-	 */
-	@Value("${usm.resources.outside:D://USM-Resources}")
-	private String outside;
-	
-	/**
-	 * USM 包之内的资源目录
-	 */
-	@Value("${usm.resources.inside:classpath:/" + Conts.DEFAULT_STATIC_FLODER+ "/}")
-	private String inside ;
 
-	
+	/**
+	 * USM 包之外的资源目录 一定后面需要一个/ 访问不需要本系统的RBAC机制 /res/**
+	 */
+	@Value("${usm.resources.path-patterns.share:" + Conts.DEFAULT_OUT_STATIC_PATH_PATTERN + "}")
+	private String publicPathPatterns;
+
+	/**
+	 * 访问资源时本系统权限(RBAC) /local/**
+	 */
+	@Value("${usm.resources.path-patterns.local:" + Conts.DEFAULT_OUT_FILE_PATH_PATTERN + "}")
+	private String pretectPathPatterns;
+
+	/**
+	 * windows: D:/UsmData/share mac unix /UsmData/share
+	 */
+	@Value("${usm.resources.data.share:" + Conts.DEFAULT_OUT_FILE_PATH + Conts.DEFAULT_OUT_PUBLIC_FLODER + "/}")
+	private String outsidePublicRes;
+
+	@Value("${usm.resources.data.local:" + Conts.DEFAULT_OUT_FILE_PATH + Conts.DEFAULT_OUT_PROTECTED_FLODER + "/}")
+	private String outsideProtectedRes;
+
+	@Value("${usm.resources.data.temp:" + Conts.DEFAULT_OUT_FILE_PATH + "Temp/}")
+	private String temp;
+
+	@Value("${usm.resources.data.upload:" + Conts.DEFAULT_OUT_FILE_PATH + "Upload/}")
+	private String upload;
+
+	public String getUpload() {
+		return upload;
+	}
+
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
+
+	public String getTemp() {
+		return temp;
+	}
+
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+
 	@Value("${usm.jpa-auditing.enable:true}")
 	private boolean enableJpaAuditing;
-	
+
 	@Value("${usm.jpa-auditing.identification:id}")
 	private String identification;
 	/**
@@ -126,6 +171,26 @@ public class UsmProperties {
 		this.loginFailureTimes = loginFailureTimes;
 	}
 
+	public String getActiveProfile() {
+		return activeProfile;
+	}
+
+	public void setActiveProfile(String activeProfile) {
+		this.activeProfile = activeProfile;
+	}
+
+	public void setSwagger(SwaggerProperties swagger) {
+		this.swagger = swagger;
+	}
+
+	public void setCors(CorsProperties cors) {
+		this.cors = cors;
+	}
+
+	public void setJwt(JwtProperties jwt) {
+		this.jwt = jwt;
+	}
+
 	public String getFullname() {
 		return fullname;
 	}
@@ -150,20 +215,60 @@ public class UsmProperties {
 		this.topicMap = topicMap;
 	}
 
-	public String getOutside() {
-		return outside;
+	public void setAntPattern(AntPatternProperties antPattern) {
+		this.antPattern = antPattern;
 	}
 
-	public void setOutside(String outside) {
-		this.outside = outside;
+	/**
+	 * 默认 /res/**
+	 * 
+	 * @return
+	 */
+	public String getPublicPathPatterns() {
+		return publicPathPatterns;
 	}
 
-	public String getInside() {
-		return inside;
+	public void setPublicPathPatterns(String publicPathPatterns) {
+		this.publicPathPatterns = publicPathPatterns;
 	}
 
-	public void setInside(String inside) {
-		this.inside = inside;
+	/**
+	 * 默认 /local/**
+	 * 
+	 * @return
+	 */
+	public String getPretectPathPatterns() {
+		return pretectPathPatterns;
+	}
+
+	public void setPretectPathPatterns(String pretectPathPatterns) {
+		this.pretectPathPatterns = pretectPathPatterns;
+	}
+
+	/**
+	 * <code> windows D:/UsmData/share <br>mac unix /UsmData/share </code>
+	 * 
+	 * @return
+	 */
+	public String getOutsidePublicRes() {
+		return outsidePublicRes;
+	}
+
+	public void setOutsidePublicRes(String outsidePublicRes) {
+		this.outsidePublicRes = outsidePublicRes;
+	}
+
+	/**
+	 * window D:/UsmData/share mac unix /UsmData/share
+	 * 
+	 * @return
+	 */
+	public String getOutsideProtectedRes() {
+		return outsideProtectedRes;
+	}
+
+	public void setOutsideProtectedRes(String outsideProtectedRes) {
+		this.outsideProtectedRes = outsideProtectedRes;
 	}
 
 	public boolean isEnableJpaAuditing() {
@@ -205,6 +310,13 @@ public class UsmProperties {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	public boolean isAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(boolean alarm) {
+		this.alarm = alarm;
+	}
+
 }

@@ -1,31 +1,33 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.14.RELEASE</version>
+		<version>1.5.17.RELEASE</version>
+		<!-- <version>2.0.5.RELEASE</version> -->
 	</parent>
-	<groupId>com.github</groupId>
+	<groupId>com.github.jusm</groupId>
 	<artifactId>jusm-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>${project.artifactId}</name>
 	<description>A lightweight distributed unified system management framework.</description>
-	<url>http://www.xuxueli.com/</url>
+	<url>https://www.mzchuangweilai.com</url>
 
 	<modules>
 		<module>jusm-core</module>
 		<module>jusm-spring-boot-starter</module>
 		<module>jusm-webapp-jar</module>
 		<module>jusm-webapp-war</module>
+		<module>jusm-wechat</module>
 	</modules>
 
 	<properties>
-		<spring.boot.version>1.5.14.RELEASE</spring.boot.version>
-
-		<jusm.version>0.0.1-SNAPSHOT</jusm.version>
+		<spring.boot.version>1.5.17.RELEASE</spring.boot.version>
+		<jusm.version>0.0.1-RELEASE</jusm.version>
 		<velocity.version>1.7</velocity.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.fileupload.version>1.3.1</commons.fileupload.version>
@@ -43,8 +45,10 @@
 		<hystrix.version>1.5.12</hystrix.version>
 		<activiti.version>6.0.0</activiti.version>
 		<swagger2.version>2.7.0</swagger2.version>
+		<swagger.bootstrap.ui>1.8.2</swagger.bootstrap.ui>
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+		<lombok.version>1.16.20</lombok.version>
 	</properties>
 
 
@@ -60,7 +64,7 @@
 				<artifactId>spring-boot-starter-jdbc</artifactId>
 				<version>${spring.boot.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.thymeleaf</groupId>
 				<artifactId>thymeleaf</artifactId>
@@ -70,6 +74,11 @@
 				<groupId>nz.net.ultraq.thymeleaf</groupId>
 				<artifactId>thymeleaf-layout-dialect</artifactId>
 				<version>${thymeleaf-layout-dialect.version}</version>
+			</dependency>
+			<dependency>
+				 <groupId>org.projectlombok</groupId>
+	            <artifactId>lombok</artifactId>
+	            <version>${lombok.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -120,16 +129,16 @@
 
 	<scm>
 		<tag>master</tag>
-		<url>https://gitee.com/wenhoran/jusm-parent.git</url>
-		<connection>scm:git:https://gitee.com/wenhoran/jusm-parent.git</connection>
-		<developerConnection>scm:git:git@gitee.com:wenhoran/jusm-parent.git</developerConnection>
+		<url>https://github.com/jusm/jusm-parent.git</url>
+		<connection>scm:git:https://github.com/jusm/jusm-parent.git</connection>
+		<developerConnection>scm:git:git@github.com:jusm/jusm-parent.git</developerConnection>
 	</scm>
 	<developers>
 		<developer>
 			<id>USM</id>
 			<name>wenhaoran</name>
 			<email>804918076@qq.com</email>
-			<url>https://gitee.com/wenhoran/jusm-parent</url>
+			<url>https://github.com/jusm/jusm-parent</url>
 		</developer>
 	</developers>
 
@@ -157,7 +166,11 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.9.1</version>
+						<version>3.0.0</version>
+						<configuration>
+							<failOnError>false</failOnError>
+							<doclint>none</doclint>
+						</configuration>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -188,11 +201,11 @@
 			</build>
 			<distributionManagement>
 				<snapshotRepository>
-					<id>oss</id>
+					<id>oss-snapshots</id>
 					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 				</snapshotRepository>
 				<repository>
-					<id>oss</id>
+					<id>oss-releases</id>
 					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 				</repository>
 			</distributionManagement>

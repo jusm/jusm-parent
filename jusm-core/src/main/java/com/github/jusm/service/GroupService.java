@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.github.jusm.entities.Group;
+import com.github.jusm.entity.Group;
 
 public interface GroupService {
 	

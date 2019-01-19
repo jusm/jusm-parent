@@ -1,8 +1,9 @@
 package com.github.jusm.service;
 
+import java.util.Collection;
 import java.util.List;
 
-import com.github.jusm.entities.Role;
+import com.github.jusm.entity.Role;
 
 public interface RoleService {
 
@@ -17,4 +18,8 @@ public interface RoleService {
 	Role findByAuthority(String authority);
 
 	Role save(Role role);
+
+	Role addRole(String name, String authority, String description);
+
+	List<Role> findByAuthorityIn(Collection<String> authority);
 }

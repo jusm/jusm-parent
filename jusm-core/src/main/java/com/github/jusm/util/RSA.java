@@ -199,7 +199,7 @@ public final class RSA {
 	 */
 	public static String decryptByPriKey(String priKey, String ciphertext) {
 		if (StringUtils.isBlank(priKey) || StringUtils.isBlank(ciphertext)) {
-			return StringUtils.EMPTY;
+			return ciphertext;
 		}
 		try {
 			byte[] d = Base64.decodeBase64(priKey);

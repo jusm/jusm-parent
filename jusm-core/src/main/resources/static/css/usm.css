@@ -8,7 +8,7 @@ html, body {
 }
 
 #content-wrapper {
-	padding-top: 50px;
+	padding-top: 0px;
 }
 
 .carousel-inner>.item>img {

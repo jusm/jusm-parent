@@ -1,5 +1,12 @@
 package com.github.jusm.exception;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+
+import com.alibaba.fastjson.JSON;
 import com.github.jusm.model.ReturnCode;
 
 public class BizException extends RuntimeException{
@@ -17,6 +24,7 @@ public class BizException extends RuntimeException{
 		super(data);
 		this.result= result;
 	}
+	
 	public ReturnCode getResult() {
 		return result;
 	}

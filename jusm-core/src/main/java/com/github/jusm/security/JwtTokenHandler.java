@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.github.jusm.entities.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -59,7 +56,7 @@ public class JwtTokenHandler implements Serializable {
 		return username;
 	}
 
-	private Date getCreatedDateFromToken(String token) {
+	public Date getCreatedDateFromToken(String token) {
 		Date created;
 		try {
 			final Claims claims = getClaimsFromToken(token);
@@ -104,7 +101,7 @@ public class JwtTokenHandler implements Serializable {
 		return (lastPasswordReset != null && created.before(lastPasswordReset));
 	}
 
-	public String generateToken(User userDetails) {
+	public String generateToken(JwtUser userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
 		claims.put(CLAIM_KEY_CREATED, userDetails.getLastLoginTime());
@@ -133,8 +130,7 @@ public class JwtTokenHandler implements Serializable {
 		return refreshedToken;
 	}
 
-	public Boolean validateToken(String token, UserDetails userDetails) {
-		final User user = (User) userDetails;
+	public Boolean validateToken(String token, final JwtUser user) {
 		final String username = getUsernameFromToken(token);
 		final Date created = getCreatedDateFromToken(token);
 		final Date expiration = getExpirationDateFromToken(token);
@@ -154,7 +150,7 @@ public class JwtTokenHandler implements Serializable {
 					+ (created.compareTo(user.getLastLoginTime()) == 0));
 			logger.info(" created  >>>> " + created.getTime());
 			logger.info(" user.getLastLoginTime()  >>>> " + user.getLastLoginTime().getTime());
-			logger.info(" username.equals(user.getUsername())   >>>> " + (username.equals(user.getUsername())));
+			logger.info(" username.equals(user.getUsername())   >>>> " + user.getUsername() + (username.equals(user.getUsername())));
 			logger.info(" !isTokenExpired(token)  >>>> " + (!isTokenExpired(token)));
 //			logger.info(" now.after(created)  >>>> " + (now.after(created)));// 集群环境下 这个很难保证所以去掉
 			logger.info(" now.before(expiration)  >>>> " + (now.before(expiration)));

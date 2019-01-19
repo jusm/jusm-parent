@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -23,8 +24,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.github.jusm.entities.EmailAccount;
-import com.github.jusm.entities.MessageInfo;
+import com.github.jusm.entity.EmailAccount;
+import com.github.jusm.entity.MessageInfo;
 
  
 public class EmailUtil {
@@ -114,7 +115,18 @@ public class EmailUtil {
         return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println(checkEmail("910@q.com"));
+    public static void main(String[] args) throws AddressException, MessagingException, IOException {
+//        System.out.println(checkEmail("910@q.com"));
+        MessageInfo msg= new MessageInfo();
+		msg.setFrom("18565826287@163.com");
+		msg.setSubject("邮件主题");
+		msg.setTo(Arrays.asList("haoran.wen@7road.com"));
+		msg.setMsg("测试测试邮件");
+		msg.setSendDate(new Date());
+		EmailAccount emailAccount = new EmailAccount();
+		emailAccount.setPassword("wenhaoran163");
+		emailAccount.setUsername("18565826287@163.com");
+		emailAccount.setPlace("smtp.163.com");
+		boolean sslSend = EmailUtil.sslSend(msg, emailAccount);
     }
 }

@@ -226,7 +226,7 @@
 						"number": "p_1_4_4",
 						"uri": "menus",
 						"httpMethod": 'GET',
-						"type": "MENU",
+						"type": "BUTTON",
 						"description": "描述暂无",
 						"position": 0,
 						"children": []
@@ -237,9 +237,9 @@
 	},
 	{
 		"icon": "fa fa-link",
-		"name": "接口文档",
+		"name": "应用接口",
 		"number": "p_2",
-		"uri": "/swagger-ui.html",
+		"uri": "",
 		"httpMethod": "GET",
 		"type": "MENU",
 		"description": "描述暂无",
@@ -247,9 +247,9 @@
 		"children": [
 			{
 				"icon": "fa fa-link",
-				"name": "API接口调用GET",
+				"name": "接口文档（原版）",
 				"number": "p_2_1",
-				"uri": "/api/**",
+				"uri": "/swagger-ui.html",
 				"httpMethod": "GET",
 				"type": "MENU",
 				"description": "以/api/**开始的接口",
@@ -258,32 +258,32 @@
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "短链接接口调用",
+				"name": "跨域资源",
 				"number": "p_2_2",
-				"uri": "/short-uri/**",
+				"uri": "/cors",
 				"httpMethod": null,
-				"type": "FUNCTION",
-				"description": "以/glue/**开始 可执行逻辑代码接口调用",
+				"type": "MENU",
+				"description": "测试跨域资源页面",
 				"position": 2,
 				"children": []
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "短链接记录删除",
+				"name": "接口文档（新版）",
 				"number": "p_2_3",
-				"uri": "/short-uri/remove",
-				"httpMethod": 'POST',
-				"type": "FUNCTION",
-				"description": "短链接记录删除",
+				"uri": "/doc.html",
+				"httpMethod": 'GET',
+				"type": "MENU",
+				"description": "接口文档（新版）",
 				"position": 3,
 				"children": []
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "短链接记录查询",
+				"name": "API接口调用PUT",
 				"number": "p_2_4",
-				"uri": "/short-uri/list",
-				"httpMethod": 'GET',
+				"uri": "/api/**",
+				"httpMethod": 'PUT',
 				"type": "FUNCTION",
 				"description": "短链接记录删除",
 				"position": 4,
@@ -291,9 +291,9 @@
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "短链接记录分页查询",
+				"name": "API接口调用GET",
 				"number": "p_2_5",
-				"uri": "/short-uri/page-list",
+				"uri": "/api/**",
 				"httpMethod": 'GET',
 				"type": "FUNCTION",
 				"description": "短链接记录删除",
@@ -306,31 +306,42 @@
 				"number": "p_2_6",
 				"uri": "/api/**",
 				"httpMethod": "POST",
-				"type": "MENU",
+				"type": "FUNCTION",
 				"description": "以/api/**开始的接口",
 				"position": 6,
 				"children": []
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "API日志统计POST",
+				"name": "API接口调用DELETE",
 				"number": "p_2_7",
-				"uri": "/apilog/**",
-				"httpMethod": "POST",
-				"type": "MENU",
-				"description": "apilog",
+				"uri": "/api/**",
+				"httpMethod": "DELETE",
+				"type": "FUNCTION",
+				"description": "以/api/**开始的接口",
 				"position": 7,
 				"children": []
 			},
 			{
 				"icon": "fa fa-link",
-				"name": "API日志统计GET",
+				"name": "API日志统计POST",
 				"number": "p_2_8",
+				"uri": "/apilog/**",
+				"httpMethod": "POST",
+				"type": "MENU",
+				"description": "apilog",
+				"position": 8,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "API日志统计GET",
+				"number": "p_2_9",
 				"uri": "/apilog/**",
 				"httpMethod": "GET",
 				"type": "MENU",
 				"description": "apilog",
-				"position": 8,
+				"position": 9,
 				"children": []
 			}
 		]
@@ -345,5 +356,115 @@
 		"description": "描述暂无",
 		"position": 3,
 		"children": []
+	},
+	{
+		"icon": "fa fa-link",
+		"name": "系统配置",
+		"number": "p_4",
+		"uri": null,
+		"httpMethod": null,
+		"type": "MENU",
+		"description": "描述暂无",
+		"position": 4,
+		"children": [	{
+				"icon": "fa fa-link",
+				"name": "环境配置",
+				"number": "p_4_1",
+				"uri": "/profiles.html",
+				"httpMethod": "POST",
+				"type": "MENU",
+				"description": "系统环境配置",
+				"position": 1,
+				"children": [	{
+						"icon": "fa fa-link",
+						"name": "系统日志",
+						"number": "p_4_1_1",
+						"uri": "/loggers/**",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 1
+					}
+				]
+			}
+		]
+	},
+	{
+		"icon": "fa fa-link",
+		"name": "RestAPI",
+		"number": "p_5",
+		"uri": null,
+		"httpMethod": null,
+		"type": "FUNCTION",
+		"description": "开放接口",
+		"position": 5,
+		"children": [
+			{
+				"icon": "fa fa-link",
+				"name": "POST API",
+				"number": "p_5_1",
+				"uri": "/api/**",
+				"httpMethod": "POST",
+				"type": "FUNCTION",
+				"description": "post api",
+				"position": 1,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "DELETE API",
+				"number": "p_5_2",
+				"uri": "/api/**",
+				"httpMethod": "DELETE",
+				"type": "FUNCTION",
+				"description": "DELETE api",
+				"position": 2,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "PUT API",
+				"number": "p_5_3",
+				"uri": "/api/**",
+				"httpMethod": "PUT",
+				"type": "FUNCTION",
+				"description": "PUT api",
+				"position": 3,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "GET API",
+				"number": "p_5_4",
+				"uri": "/api/**",
+				"httpMethod": "GET",
+				"type": "FUNCTION",
+				"description": "GET api",
+				"position": 4,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "OPTIONS API",
+				"number": "p_5_5",
+				"uri": "/api/**",
+				"httpMethod": "OPTIONS",
+				"type": "FUNCTION",
+				"description": "OPTIONS api",
+				"position": 5,
+				"children": []
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "HEAD API",
+				"number": "p_5_6",
+				"uri": "/api/**",
+				"httpMethod": "HEAD",
+				"type": "FUNCTION",
+				"description": "HEAD api",
+				"position": 6,
+				"children": []
+			}
+		]
 	}
 ]

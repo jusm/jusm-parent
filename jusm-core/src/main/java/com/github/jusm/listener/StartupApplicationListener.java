@@ -26,7 +26,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 		}
 	}
 
-	public interface StartupJob {
+	public static interface StartupJob {
 		void run(ContextRefreshedEvent event);
 	}
 }

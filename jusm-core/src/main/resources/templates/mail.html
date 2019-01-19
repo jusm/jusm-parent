@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div style="background-color: #FFF; padding: 35px;">
+		<table cellpadding="0" align="center"
+			style="width: 600px; margin: 0px auto; text-align: left; position: relative; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; font-size: 14px; font-family: 微软雅黑, 黑体; line-height: 1.5; box-shadow: rgb(153, 153, 153) 0px 0px 5px; border-collapse: collapse; background-position: initial initial; background-repeat: initial initial; background: #fff;">
+			<tbody>
+				<tr>
+					<th valign="middle"
+						style="height: 25px; line-height: 25px; padding: 15px 35px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #C46200; background-color: #FEA138; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+						<font face="微软雅黑" size="5" style="color: rgb(255, 255, 255);">JUSM!
+							（统一系统管理）</font>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding: 25px 35px 40px; background-color: #fff;">
+							<h2 style="margin: 5px 0px;">
+								<font color="#333333" style="line-height: 20px;"><font
+									style="line-height: 22px;" size="4">亲爱的 [[${username}]]：</font></font>
+							</h2>
+							<p>
+								首先感谢您加入JUSM，请在十分钟内点击链接完成注册！ <a th:href="@{/{register}}"
+									class="btn btn-sm">激活链接</a>
+							</p>
+							<p align="right">JUSM! 官方团队</p>
+							<p align="right">[[${time}]]</p>
+							<div
+								style="font-size: 12px; border-top: #e6e6e6 1px solid; color: #999; padding-bottom: 10px; padding-top: 10px; padding-left: 0px; line-height: 20px; padding-right: 0px">
+								如有任何问题，可以与我们联系，我们将尽快为你解答。 <br>Email：<a href="jusm@126.com"
+									rel="noopener" target="_blank">jusm@126.c<wbr>om
+								</a> ，电话：<span style="border-bottom: 1px dashed #ccc; z-index: 1"
+									t="7" onclick="return false;" data="4006-2828-35">4006-2828-35</span>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

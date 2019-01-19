@@ -27,9 +27,18 @@ public final class RedisKeys {
 	public static final String USM_MODULE_SYS_TOKEN = "USM:MODULE:SYS:TOKEN:";
 
 	public static final String USM_MODULE_PARCEL_SMSCODE = "USM:MODULE:PARCEL:SMSCODE:";
+	
+	public static final String USM_MODULE_HAWKEYE_SMSCODE = "USM:MODULE:HAWKEYE:SMSCODE:";
 
 	public static final String USM_MODULE_PARCEL_WECHAT_ACCESS_TOKEN = "USM:MODULE:PARCEL:WECHAT:ACCESSTOKEN";
 
 	public static final String USM_MODULE_PARCEL_SMSCODE_COUNT = "USM:MODULE:ADS:SMSCODE:COUNT:";
+	
+	public static final String BIZ_WAYBILL_INFO = "BIZWAYBILLINFO";
+	
+	public static final String BIZ_WAYBILL_REPORT_INFO = "BIZWAYBILLREPORTINFO";
+	
+	
+	public static final String USM_MODULE_SYS_USERINFO = "USM:USERINFO:";
 
 }

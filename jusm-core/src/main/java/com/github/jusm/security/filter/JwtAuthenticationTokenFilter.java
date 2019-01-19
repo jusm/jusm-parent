@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -24,9 +23,11 @@ import org.springframework.web.util.UrlPathHelper;
 import com.alibaba.fastjson.JSONObject;
 import com.github.jusm.model.R;
 import com.github.jusm.model.ReturnCode;
-import com.github.jusm.security.CorsProperties;
 import com.github.jusm.security.JwtTokenHandler;
+import com.github.jusm.security.JwtUser;
 import com.github.jusm.security.UsmRequestMatcher;
+import com.github.jusm.service.UserService;
+import com.github.jusm.web.cors.CorsProperties;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
@@ -34,7 +35,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 	private final UrlPathHelper pathHelper = new UrlPathHelper();
 
-	private UserDetailsService userDetailsService;
+	private UserService userService;
 
 	private UsmRequestMatcher usmRequestMatcher;
 
@@ -42,12 +43,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 	private CorsProperties corsProperties;
 
-	public JwtAuthenticationTokenFilter(UserDetailsService userDetailsService, UsmRequestMatcher usmRequestMatcher,
+	public JwtAuthenticationTokenFilter(UserDetailsService userDetailsService,UserService userService, UsmRequestMatcher usmRequestMatcher,
 			JwtTokenHandler jwtTokenHandler, CorsProperties corsProperties) {
-		this.userDetailsService = userDetailsService;
 		this.usmRequestMatcher = usmRequestMatcher;
 		this.jwtTokenHandler = jwtTokenHandler;
 		this.corsProperties = corsProperties;
+		this.userService = userService;
 	}
 
 	/**
@@ -77,29 +78,30 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 		String authHeader = request.getHeader(jwtTokenHandler.getTokenHeaderKey());
 		if (!HttpMethod.OPTIONS.matches(request.getMethod())) {
 			if (authHeader != null && authHeader.startsWith(jwtTokenHandler.getTokenPrefix())) {
-				final String authToken = authHeader.substring(jwtTokenHandler.getTokenPrefix().length()); // The part
-																											// after
-																											// "Bearer "
+				final String authToken = authHeader.substring(jwtTokenHandler.getTokenPrefix().length()); // The part after  "Bearer "
 				String username = jwtTokenHandler.getUsernameFromToken(authToken);
-				logger.debug("checking authentication " + username);
-				// boolean expiredToken =
-				// redisUtil.isMember(RedisKeys.getExpiredTokenKey(username),authToken);服务器时间不一致导致校验失败
+				logger.debug("Checking  " + username);
 				if (username != null /* && !expiredToken */) {
 					logger.debug("authenticated user " + username + "............");
 					// 如果我们足够相信token中的数据，也就是我们足够相信签名token的secret的机制足够好
 					// 这种情况下，我们可以不用再查询数据库，而直接采用token中的数据
 					// 本例中，我们还是通过Spring Security的 @UserDetailsService 进行了数据查询
 					// 但简单验证的话，你可以采用直接验证token是否合法来避免昂贵的数据查询,但是接口中很多用到的用户的信息不止是token中的用户信息所以增加一次数据查询用户信息
-					UserDetails userDetails = null;
+					JwtUser user = null;
 					try {
-						userDetails = this.userDetailsService.loadUserByUsername(username);
+						user = this.userService.loadUserByUsername(username);
 					} catch (UsernameNotFoundException e) {
 						logger.warn("Username: " + username + " 不存在或未激活的用户");
-						responseOutWithJson(response, R.failure("不存在或未激活的用户"));
+						responseOutWithJson(response, R.result(ReturnCode.NOT_LOGGED_IN_ERROR));
 					}
-					if (jwtTokenHandler.validateToken(authToken, userDetails)) {
+					if(user == null) {
+						responseOutWithJson(response, R.result(ReturnCode.NOT_LOGGED_IN_ERROR));
+					}
+					else if(user.getLastLogoutTime() != null && user.getLastLogoutTime().after(jwtTokenHandler.getCreatedDateFromToken(authToken))) {
+						responseOutWithJson(response, R.result(ReturnCode.CREDENTIALS_EXPIRED_BY_LOGOUT));
+					}else if (jwtTokenHandler.validateToken(authToken, user)) {
 						UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-								userDetails, null, userDetails.getAuthorities());
+								user, null, user.getAuthorities());
 						authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 						logger.debug("Authenticated user " + username + ", setting security context");
 						SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -108,7 +110,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 						logger.warn("Token 校验失败");
 						logger.warn("Username:" + username);
 						logger.warn("AuthToken:" + authToken);
-						responseOutWithJson(response, R.result(ReturnCode.TOKEN_ERROR, "请重新登录"));
+						responseOutWithJson(response, R.result(ReturnCode.TOKEN_ERROR));
 					}
 				} else {
 					logger.warn("username 为空或token失效 ");
@@ -117,8 +119,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 					responseOutWithJson(response, R.result(ReturnCode.TOKEN_VALID_FAILED, "请登录"));
 				}
 			} else {
-				responseOutWithJson(response, R.result(ReturnCode.AUTH_ERROR,
-						"请求头需携带以Authorization为key, 以'" + jwtTokenHandler.getTokenPrefix() + "'为前缀的token参数"));
+				responseOutWithJson(response, R.result(ReturnCode.TOKEN_VALID_FAILED));
 			}
 		} else {
 			chain.doFilter(request, response);

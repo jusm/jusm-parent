@@ -10,7 +10,7 @@ public class JwtProperties {
 
 	private String secret = "haoran";
 
-	private Long expiration = 604800L;
+	private Long expiration = Conts.DEFAULT_MAX_AGE;
 
 	private boolean validation = true;
 

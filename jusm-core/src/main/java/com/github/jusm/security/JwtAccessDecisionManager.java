@@ -13,7 +13,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.github.jusm.entities.User;
+import com.github.jusm.entity.User;
 
 
 /**

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.jusm.entities.Permission;
+import com.github.jusm.entity.Permission;
 import com.github.jusm.model.Menu;
 import com.github.jusm.service.PermissionService;
 

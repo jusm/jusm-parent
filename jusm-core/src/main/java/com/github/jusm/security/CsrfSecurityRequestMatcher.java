@@ -11,7 +11,7 @@ class CsrfSecurityRequestMatcher implements RequestMatcher {
 	private Pattern allowedMethods = Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
 	
 	
-	private RegexRequestMatcher unprotectedMatcher = new RegexRequestMatcher("^/rest/.*", null);
+	private RegexRequestMatcher unprotectedMatcher = new RegexRequestMatcher("^/api/*", null);
 
 	@Override
 	public boolean matches(HttpServletRequest request) {

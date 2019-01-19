@@ -29,7 +29,7 @@ public class UsmHystrixCommand extends HystrixCommand<Response> {
 
 	private AsyncHttpClient asyncHttpClient;
 
-	protected UsmHystrixCommand(Setter setter, String url, Map<String, String> headers, String requestBody,
+	public UsmHystrixCommand(Setter setter, String url, Map<String, String> headers, String requestBody,
 			HttpMethod httpMethod, AsyncHttpClient asyncHttpClient) {
 		super(setter);
 		this.url = url;
@@ -43,12 +43,12 @@ public class UsmHystrixCommand extends HystrixCommand<Response> {
 		this.asyncHttpClient = asyncHttpClient;
 	}
 
-	protected UsmHystrixCommand(Setter setter, String url, String requestBody, HttpMethod httpMethod,
+	public UsmHystrixCommand(Setter setter, String url, String requestBody, HttpMethod httpMethod,
 			AsyncHttpClient asyncHttpClient) {
 		this(setter, url, null, requestBody, httpMethod, asyncHttpClient);
 	}
 
-	protected UsmHystrixCommand(Setter setter, String url, HttpMethod httpMethod, AsyncHttpClient asyncHttpClient) {
+	public UsmHystrixCommand(Setter setter, String url, HttpMethod httpMethod, AsyncHttpClient asyncHttpClient) {
 		this(setter, url, null, httpMethod, asyncHttpClient);
 	}
 

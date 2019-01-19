@@ -2,15 +2,15 @@ package com.github.jusm.security.handler;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -18,7 +18,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
-import com.github.jusm.entities.User;
+import com.github.jusm.security.JwtUser;
 
 /**
  * 登录授权成功后操作控制，如果是直接点击登录的情况下，根据授权权限跳转不同页面； 否则跳转到原请求页面
@@ -26,17 +26,22 @@ import com.github.jusm.entities.User;
  */
 public class UsmAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-	private Map<String, String> authDispatcherMap;
+	private Map<String, String> successLoginDispatcherMap;
+
 	private RequestCache requestCache = new HttpSessionRequestCache();
 
 	private String contextPath = "/";
 
-	public UsmAuthenticationSuccessHandler(String contextPath) {
+	public UsmAuthenticationSuccessHandler(String contextPath,Map<String, String> successLoginDispatcherMap) {
 		if (contextPath == null || "".equals(contextPath.trim())) {
 			this.contextPath = "/";
 		} else {
 			this.contextPath = contextPath;
 		}
+		if (!this.contextPath.endsWith("/")) {
+			this.contextPath += "/";
+		}
+		this.successLoginDispatcherMap = successLoginDispatcherMap;
 	}
 
 	public String getContextPath() {
@@ -47,22 +52,6 @@ public class UsmAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		this.contextPath = contextPath;
 	}
 
-	@PostConstruct
-	private void init() {
-		authDispatcherMap = new ConcurrentHashMap<>();
-		if (!contextPath.endsWith("/")) {
-			contextPath += "/";
-		}
-		authDispatcherMap.put("role_admin", "/console");
-		authDispatcherMap.put("role_actuator", "/console");
-		authDispatcherMap.put("role_dba", "/console");
-		authDispatcherMap.put("role_caller", "/swagger-ui.html");
-		authDispatcherMap.put("role_user", "/console");
-	}
-
-	// @Autowired
-	// private UserService userService;
-
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -71,22 +60,21 @@ public class UsmAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		if (authCollection.isEmpty()) {
 			return;
 		}
-
 		// 认证成功后，获取用户信息并添加到session中
-		User user = (User) authentication.getPrincipal();
-		// User user = userService.findByUsername(userDetails.getUsername());
-		request.getSession().setAttribute("user", user);
+		JwtUser user = (JwtUser) authentication.getPrincipal();
 		String url = null;
 		// 从别的请求页面跳转过来的情况，savedRequest不为空
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		if (savedRequest != null && StringUtils.isNotBlank(savedRequest.getRedirectUrl())) {
 			url = savedRequest.getRedirectUrl();
-		}else if (user != null && user.getDefaultRole() != null) {
-			url = authDispatcherMap.get(user.getDefaultRole().getAuthority());
+		} else if (user != null && user.getDefaultGrantedAuthority() != null
+				&& successLoginDispatcherMap.containsKey(user.getDefaultGrantedAuthority().getAuthority())) {
+			String authority = user.getDefaultGrantedAuthority().getAuthority();
+			url = successLoginDispatcherMap.get(authority);
 		} else {
 			url = "/index";
 		}
-		getRedirectStrategy().sendRedirect(request, response, url); 
+		getRedirectStrategy().sendRedirect(request, response, url);
 	}
 
 	public RequestCache getRequestCache() {
@@ -97,12 +85,11 @@ public class UsmAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		this.requestCache = requestCache;
 	}
 
-	public Map<String, String> getAuthDispatcherMap() {
-		return authDispatcherMap;
+	public Map<String, String> getSuccessLoginDispatcherMap() {
+		return successLoginDispatcherMap;
 	}
 
-	public void setAuthDispatcherMap(Map<String, String> authDispatcherMap) {
-		this.authDispatcherMap = authDispatcherMap;
+	public void setSuccessLoginDispatcherMap(Map<String, String> successLoginDispatcherMap) {
+		this.successLoginDispatcherMap = successLoginDispatcherMap;
 	}
-
 }

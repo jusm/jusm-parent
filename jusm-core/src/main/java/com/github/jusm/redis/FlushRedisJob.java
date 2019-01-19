@@ -15,12 +15,12 @@ public class FlushRedisJob implements StartupJob {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private RedisTemplateFacade redisTemplateFacade;
+	private RedisRepository redisRepository;
 
 	@Override
 	public void run(ContextRefreshedEvent event) {
 		logger.info("即将清除redis数据");
-		String flushDB = redisTemplateFacade.flushDB();
+		String flushDB = redisRepository.flushDB();
 		logger.info(flushDB);
 	}
 

@@ -3,7 +3,7 @@ package com.github.jusm.service;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.jusm.entities.Permission;
+import com.github.jusm.entity.Permission;
 
 /**
  * 1,菜单操作
@@ -32,6 +32,5 @@ public interface PermissionService {
 	 * @return
 	 */
 	List<Permission> treeMenus(Collection<String> authorities);
-	
 	
 }

@@ -35,8 +35,10 @@ public class UsmRequestMatcher {
 		List<RequestMatcher> staticUrl = new ArrayList<>();
 		for (int i = 0; i < webIngoreAntPatterns.length; i++) {
 			logger.debug("Add staticsPathPatterns" + webIngoreAntPatterns[i]);
-			RequestMatcher pathRequestMatcher = new AntPathRequestMatcher(webIngoreAntPatterns[i], "GET");
-			staticUrl.add(pathRequestMatcher);
+			RequestMatcher pathGetRequestMatcher = new AntPathRequestMatcher(webIngoreAntPatterns[i], "GET");
+			RequestMatcher pathPostRequestMatcher = new AntPathRequestMatcher(webIngoreAntPatterns[i], "POST");
+			staticUrl.add(pathGetRequestMatcher);
+			staticUrl.add(pathPostRequestMatcher);
 		}
 		setWebIgnoreRequestMatcher(new OrRequestMatcher(staticUrl));
 	}

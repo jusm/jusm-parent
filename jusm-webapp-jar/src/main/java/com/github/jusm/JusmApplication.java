@@ -8,6 +8,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import com.github.jusm.listener.ShutdownApplicationListener;
 import com.github.jusm.listener.StartupApplicationListener;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@EnableSwagger2
 @SpringBootApplication
 public class JusmApplication extends SpringBootServletInitializer {
 

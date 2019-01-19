@@ -1,50 +1,43 @@
 package com.github.jusm.exception;
 
+import com.github.jusm.model.ReturnCode;
+
 /**
  * 自定义异常
  */
 public class UsmException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-
-	private String msg;
-	private int code = 500;
-
-	public UsmException(String msg) {
-		super(msg);
-		this.msg = msg;
+	
+	private ReturnCode resultCode;
+	
+	public UsmException(String data) {
+		super(data);
+		this.resultCode= ReturnCode.FAILTURE;
+	}
+	
+	public UsmException(String data,Throwable e) {
+		super(data,e);
+		this.resultCode= ReturnCode.FAILTURE;
+	}
+	
+	public UsmException(ReturnCode resultCode, String data) {
+		super(data);
+		this.resultCode= resultCode;
+	}
+	
+	public UsmException(ReturnCode resultCode, String data,Throwable e) {
+		super(data,e);
+		this.resultCode= resultCode;
+	}
+	
+	public ReturnCode getReturnCode() {
+		return resultCode;
 	}
 
-	public UsmException(String msg, Throwable e) {
-		super(msg, e);
-		this.msg = msg;
+	public void setReturnCode(ReturnCode resultCode) {
+		this.resultCode = resultCode;
 	}
+	
 
-	public UsmException(String msg, int code) {
-		super(msg);
-		this.msg = msg;
-		this.code = code;
-	}
-
-	public UsmException(String msg, int code, Throwable e) {
-		super(msg, e);
-		this.msg = msg;
-		this.code = code;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
 
 }

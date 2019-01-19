@@ -55,6 +55,11 @@ public class UsmInstallFilter extends OncePerRequestFilter {
 	private RequestMatcher initRequestMatcher;
 
 	private UsmRequestMatcher usmRequestMatcher;
+	
+	/**
+	 * 系统是否安装
+	 */
+	private static boolean isInstalled = false;
 
 	public UsmInstallFilter(ParameterService parameterService, String indexPath, String installPath, String initPath,
 			String contextPath, UsmRequestMatcher usmRequestMatcher) {
@@ -80,7 +85,7 @@ public class UsmInstallFilter extends OncePerRequestFilter {
 
 		if (usmRequestMatcher.getWebIgnoreRequestMatcher().matches(request)) {
 			return true;
-		} else if (parameterService.isSetup()) {
+		} else if (isInstalled || (isInstalled = parameterService.isSetup())) {
 			if (installRequestMatcher.matches(request) || initRequestMatcher.matches(request)) {
 				return false;
 			} else {
