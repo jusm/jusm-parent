@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="core.com.chidori.dao.mapper.UserWeChatInfoMapper" >
+  <resultMap id="BaseResultMap" type="core.com.chidori.model.UserWeChatInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="user_gid" property="userGid" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+    <result column="subscribe_status" property="subscribeStatus" jdbcType="INTEGER" />
+    <result column="subscribe_way" property="subscribeWay" jdbcType="INTEGER" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, user_gid, open_id, union_id, subscribe_status, subscribe_way, 
+    nick_name, sex, city, province, country, head_img_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="core.com.chidori.model.UserWeChatInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_we_chat_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_we_chat_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_we_chat_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="core.com.chidori.model.UserWeChatInfoExample" >
+    delete from user_we_chat_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="core.com.chidori.model.UserWeChatInfo" >
+    insert into user_we_chat_info (id, create_time, update_time, 
+      user_gid, open_id, union_id, 
+      subscribe_status, subscribe_way, nick_name, 
+      sex, city, province, 
+      country, head_img_url)
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, 
+      #{userGid,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+      #{subscribeStatus,jdbcType=INTEGER}, #{subscribeWay,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{headImgUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="core.com.chidori.model.UserWeChatInfo" >
+    insert into user_we_chat_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="userGid != null" >
+        user_gid,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="unionId != null" >
+        union_id,
+      </if>
+      <if test="subscribeStatus != null" >
+        subscribe_status,
+      </if>
+      <if test="subscribeWay != null" >
+        subscribe_way,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="headImgUrl != null" >
+        head_img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="userGid != null" >
+        #{userGid,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeStatus != null" >
+        #{subscribeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subscribeWay != null" >
+        #{subscribeWay,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headImgUrl != null" >
+        #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="core.com.chidori.model.UserWeChatInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_we_chat_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_we_chat_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.userGid != null" >
+        user_gid = #{record.userGid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionId != null" >
+        union_id = #{record.unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subscribeStatus != null" >
+        subscribe_status = #{record.subscribeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.subscribeWay != null" >
+        subscribe_way = #{record.subscribeWay,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImgUrl != null" >
+        head_img_url = #{record.headImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_we_chat_info
+    set id = #{record.id,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=INTEGER},
+      user_gid = #{record.userGid,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      union_id = #{record.unionId,jdbcType=VARCHAR},
+      subscribe_status = #{record.subscribeStatus,jdbcType=INTEGER},
+      subscribe_way = #{record.subscribeWay,jdbcType=INTEGER},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      city = #{record.city,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      head_img_url = #{record.headImgUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="core.com.chidori.model.UserWeChatInfo" >
+    update user_we_chat_info
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="userGid != null" >
+        user_gid = #{userGid,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeStatus != null" >
+        subscribe_status = #{subscribeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="subscribeWay != null" >
+        subscribe_way = #{subscribeWay,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="headImgUrl != null" >
+        head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="core.com.chidori.model.UserWeChatInfo" >
+    update user_we_chat_info
+    set create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      user_gid = #{userGid,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      subscribe_status = #{subscribeStatus,jdbcType=INTEGER},
+      subscribe_way = #{subscribeWay,jdbcType=INTEGER},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      head_img_url = #{headImgUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

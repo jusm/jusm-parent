@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+   <!-- 导入配置文件信息 -->
+   <context:property-placeholder ignore-resource-not-found="true" ignore-unresolvable="false"
+     location="classpath:properties/jdbc.properties,classpath:properties/vendor.properties" system-properties-mode="ENVIRONMENT"/>
+
+    <import resource="datasource.xml"/>
+
+    <task:annotation-driven executor="zzExecutor" scheduler="zzScheduler"/>
+    <task:executor id="zzExecutor" pool-size="15" queue-capacity="100" rejection-policy="CALLER_RUNS"/>
+    <task:scheduler id="zzScheduler" pool-size="20"/>
+
+   <context:annotation-config/>
+    <context:component-scan base-package="core.com.chidori">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+</beans>

@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import com.github.jusm.wx.api.WechatHttpApi;
-import com.github.jusm.wx.controller.WechatController;
+import com.github.jusm.wx.login.controller.WechatController;
 import com.github.jusm.wx.service.UserInfoService;
 
 /**

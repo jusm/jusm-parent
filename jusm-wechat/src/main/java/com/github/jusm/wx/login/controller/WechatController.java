@@ -1,4 +1,4 @@
-package com.github.jusm.wx.controller;
+package com.github.jusm.wx.login.controller;
 
 import java.io.IOException;
 import java.util.Map;
