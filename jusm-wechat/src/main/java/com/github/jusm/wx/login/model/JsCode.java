@@ -1,4 +1,4 @@
-package com.github.jusm.wx.model;
+package com.github.jusm.wx.login.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 

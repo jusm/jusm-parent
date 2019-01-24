@@ -334,4 +334,8 @@ public class UsmContext implements StartupApplicationListener.StartupJob {
 		MessageSource messageSource = SpringContextHolder.getBean(MessageSource.class);
 		return messageSource.getMessage(code, args, defaultMessage, locale);
 	}
+	
+	public static final String getActiveProfile() {
+		return SpringContextHolder.getActiveProfile();
+	}
 }

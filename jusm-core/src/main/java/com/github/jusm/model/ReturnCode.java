@@ -9,6 +9,8 @@ public enum ReturnCode {
 	OPER_SUCCESS(true, 1000, "操作成功"),
 
 	REGIST_SUCCESS(true, 1001, "注册成功,管理员激活后方可使用"),
+	
+	UNIFIEDORDER_SUCCESS(true, 1002, "微信支付统一下单成功"),
 
 	// **↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓失败的错误码↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
 
@@ -19,6 +21,8 @@ public enum ReturnCode {
 	UPLOAD_ERROR(false, 5002, "上传失败"),
 
 	ACCESS_DENIED(false, 5003, "没有权限"),
+	
+	UNIQUE_INDEX_DUPLICATE(false, 5004, "唯一索引冲突"),
 
 	// "登录已经失效,请重新验证码登录"
 	// "短信验证码不正确"
@@ -26,6 +30,8 @@ public enum ReturnCode {
 	// 不存在的用户
 	// 6000
 	WEIXIN_ACCESSTOKEN_FAILED(false, 6000, "获取Accesstoken失败"),
+	
+	UNIFIEDORDER_FAILED(false, 6001, "微信支付统一下单失败"),
 
 	ACCOUNT_TRADE_EXCEPTION(false, 6999, "转账失败"),
 	

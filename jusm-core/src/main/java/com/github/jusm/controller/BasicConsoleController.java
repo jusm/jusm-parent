@@ -35,6 +35,7 @@ import com.github.jusm.util.Conts;
 import com.github.jusm.web.ConsoleController;
 import com.sun.management.OperatingSystemMXBean;
 
+@SuppressWarnings("restriction")
 @Controller
 public class BasicConsoleController implements ConsoleController {
 

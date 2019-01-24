@@ -25,9 +25,9 @@ import com.github.jusm.wx.api.WechatHttpApi;
 import com.github.jusm.wx.api.response.Jscode2sessionResponse;
 import com.github.jusm.wx.entity.UserInfo;
 import com.github.jusm.wx.handler.UserInitializationHandler;
-import com.github.jusm.wx.model.EncryptedUserInfo;
-import com.github.jusm.wx.model.JsCode;
-import com.github.jusm.wx.service.UserInfoService;
+import com.github.jusm.wx.login.model.EncryptedUserInfo;
+import com.github.jusm.wx.login.model.JsCode;
+import com.github.jusm.wx.login.service.UserInfoService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

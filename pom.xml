@@ -23,7 +23,7 @@
 		<module>jusm-webapp-jar</module>
 		<module>jusm-webapp-war</module>
 		<module>jusm-wechat</module>
-		<module>jusm-wxpay</module>
+		<module>jusm-order</module>
 	</modules>
 
 	<properties>

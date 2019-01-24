@@ -1,4 +1,4 @@
-package com.github.jusm.wx.repository;
+package com.github.jusm.wx.login.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

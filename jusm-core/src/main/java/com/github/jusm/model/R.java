@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import com.alibaba.fastjson.JSONObject;
 import com.github.jusm.exception.BizException;
 import com.github.jusm.exception.UsmException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 
 import io.swagger.annotations.ApiModel;
@@ -101,6 +102,9 @@ public class R implements Serializable {
 		} else if (e instanceof HystrixRuntimeException) {
 			HystrixRuntimeException ex = (HystrixRuntimeException) e;
 			return R.result(ReturnCode.TIMEOUT_ERROR, ex.getMessage());
+		} else if (e instanceof MySQLIntegrityConstraintViolationException) {
+			MySQLIntegrityConstraintViolationException ex = (MySQLIntegrityConstraintViolationException) e;
+			return R.result(ReturnCode.UNIQUE_INDEX_DUPLICATE, ex.getMessage());
 		} else {
 			return new R(ReturnCode.UNKNOW_ERROR, e.getMessage());
 		}

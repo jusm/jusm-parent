@@ -138,6 +138,25 @@ public class ResourceServiceImpl implements ResourceService {
 			throw new UsmException("上传失败", e);
 		}
 	}
+	
+	@Override
+	public String upload(MultipartFile multipartFile,boolean isShare) {
+		try {
+			String originalFilename = multipartFile.getOriginalFilename();
+			String randomAlphanumeric = RandomStringUtils.randomAlphanumeric(32);
+			String uploadPath = UsmContext.getUploadPath();
+			FileUtils.forceMkdir(new File(uploadPath + randomAlphanumeric));
+			File dest = new File(uploadPath + randomAlphanumeric + "/" + originalFilename);
+			multipartFile.transferTo(dest);
+			return dest.getAbsolutePath();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			throw new UsmException("上传失败", e);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new UsmException("上传失败", e);
+		}
+	}
 
 	@Override
 	public boolean storage(Resource resource) {
@@ -181,6 +200,11 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		
 		return null;
+	}
+
+	@Override
+	public String upload(MultipartFile multipartFile) {
+		return upload( multipartFile, true);
 	}
 
 }

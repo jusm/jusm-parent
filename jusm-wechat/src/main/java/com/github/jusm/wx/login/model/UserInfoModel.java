@@ -1,4 +1,4 @@
-package com.github.jusm.wx.model;
+package com.github.jusm.wx.login.model;
 
 /***
  * { "nickName": "Band", "gender": 1, "language": "zh_CN", "city": "Guangzhou",

@@ -28,4 +28,8 @@ public interface ResourceService {
 	String upload(MultipartFile multipartFile, String uploadPath);
 	
 	String storage(String base64Image, String uploadPath);
+
+	String upload(MultipartFile multipartFile);
+
+	String upload(MultipartFile multipartFile, boolean isShare);
 }

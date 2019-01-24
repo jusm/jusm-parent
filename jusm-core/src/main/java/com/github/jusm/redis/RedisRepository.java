@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.types.RedisClientInfo;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -51,19 +52,15 @@ public class RedisRepository {
 	}
 	
 	public void set(byte[] key, byte[] value) {
-//		jedisConnectionFactory.getConnection().set(key, value);
 		redisTemplate.opsForValue().set(key, value);
 	}
 
 	public byte[] get(byte[] key) {
 		return (byte[])redisTemplate.opsForValue().get(key);
-//		return jedisConnectionFactory.getConnection().get(key);
 	}
 
 	public void del(byte[] key) {
 		redisTemplate.delete(key);
-//		Long del = jedisConnectionFactory.getConnection().del(key);
-//		return del;
 	}
 
 	public String get(String key) {
@@ -87,6 +84,15 @@ public class RedisRepository {
 		});
 		return result;
 	}
+	
+	public Long incr(String key, long liveTime,TimeUnit timeUnit) {
+        RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, jedisConnectionFactory);
+        Long increment = entityIdCounter.getAndIncrement();
+        if ((null == increment || increment.longValue() == 0) && liveTime > 0) {//初始设置过期时间
+            entityIdCounter.expire(liveTime, timeUnit);
+        }
+        return increment;
+    }
 
 	public long add(String key, String value, long exipre) {
 

@@ -21,6 +21,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -47,24 +48,25 @@ public abstract class UuidEntity implements Serializable {
 	@ApiModelProperty(value = "UUID主键 新增可以不用输入", position = Integer.MIN_VALUE)
 	protected String id;
 
-	@Column(name = "create_by")
+	@Column(name = "create_by",updatable=false)
 	@ApiModelProperty(value = "创建者的用户名", position = Integer.MAX_VALUE - 200, hidden = true)
 	@CreatedBy
 	protected String createBy;
 
-	@Column(name = "create_time")
+	@Column(name = "create_time",updatable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreatedDate
 	@ApiModelProperty(value = "创建时间 格式:yyyy-MM-dd HH:mm:ss", position = Integer.MAX_VALUE - 199, hidden = true)
 	protected Date createTime;
 
-	@Column(name = "lastmodified_by")
+	@Column(name = "lastmodified_by",insertable=false)
 	@LastModifiedBy
 	@ApiModelProperty(value = "更新者的用户名", position = Integer.MAX_VALUE - 198, hidden = true)
 	protected String lastmodifiedBy;
 
-	@Column(name = "lastmodified_time")
+	@JsonIgnoreProperties(allowSetters=false)
+	@Column(name = "lastmodified_time",insertable=false)
 	@LastModifiedDate
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)

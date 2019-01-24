@@ -1,4 +1,4 @@
-package com.github.jusm.wx.service;
+package com.github.jusm.wx.login.service;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.jusm.exception.BizException;
 import com.github.jusm.model.ReturnCode;
 import com.github.jusm.wx.entity.UserInfo;
-import com.github.jusm.wx.repository.UserInfoRepository;
+import com.github.jusm.wx.login.repository.UserInfoRepository;
 import com.github.jusm.wx.util.AES;
 
 /**
