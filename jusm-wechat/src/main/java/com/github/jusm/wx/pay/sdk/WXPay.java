@@ -133,7 +133,11 @@ public class WXPay {
 		String signTypeInData = reqData.get(WXPayConstants.FIELD_SIGN_TYPE);
 		SignType signType;
 		if (signTypeInData == null) {
-			signType = SignType.MD5;
+			if(this.signType == null) {
+				signType = SignType.MD5;
+			}else {
+				signType = this.signType;
+			}
 		} else {
 			signTypeInData = signTypeInData.trim();
 			if (signTypeInData.length() == 0) {
