@@ -1,6 +1,10 @@
 package com.github.jusm.order.service;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.github.jusm.order.entity.Order;
 import com.github.jusm.order.entity.OrderItem;
@@ -65,8 +69,21 @@ public interface OrderService {
 	String generateID();
 
 	Order findByOut_trade_no(String out_trade_no);
-	
-	
 
 	Order save(Order order);
+
+	/**
+	 * 分页查询订单
+	 * 
+	 * @param id
+	 * @param status
+	 * @param shippingName
+	 * @param userId
+	 * @param stime
+	 * @param etime
+	 * @param pageRequest
+	 * @return
+	 */
+	Page<Order> search(String id, int[] status, String shippingName, String userId, Date stime, Date etime,
+			Pageable pageRequest);
 }

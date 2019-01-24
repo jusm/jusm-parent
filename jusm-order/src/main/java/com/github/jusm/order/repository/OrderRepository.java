@@ -7,4 +7,5 @@ import com.github.jusm.order.entity.Order;
 
 public interface OrderRepository extends JpaRepository<Order, String>, JpaSpecificationExecutor<Order> {
 
+	
 }

@@ -2,11 +2,23 @@ package com.github.jusm.order.service.impl;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.CriteriaBuilder.In;
+
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.jusm.order.entity.Order;
@@ -33,6 +45,55 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderShippingRepository orderShippingRepository;
+
+	@Override
+	public Page<Order> search(String id, int[] status, String shippingName, String userId, Date stime, Date etime,
+			Pageable pageRequest) {
+		Page<Order> resultList = null;
+		Specification<Order> querySpecifi = new Specification<Order>() {
+			@Override
+			public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+				List<Predicate> predicates = new ArrayList<>();
+
+				if (StringUtils.isNotBlank(id)) {
+					// 模糊查找
+					predicates.add(cb.like(root.get("id").as(String.class), "%" + id.trim() + "%"));
+				}
+
+				if (status != null && status.length > 0) {
+					// 模糊查找
+					In<Integer> in = cb.in(root.get("status"));
+					for (Integer e : status) {
+						in.value(e);
+					}
+					predicates.add(in);
+					// predicates.add(cb.in(root.get("status").as(Integer.class),status));
+				}
+				if (StringUtils.isNotBlank(shippingName)) {
+					// 模糊查找
+					predicates.add(cb.like(root.get("shippingName").as(String.class), shippingName.trim()));
+				}
+				if (StringUtils.isNotBlank(userId)) {
+					// 模糊查找
+					predicates.add(cb.like(root.get("userId").as(String.class), userId.trim()));
+				}
+
+				if (stime != null) {
+					// 大于或等于传入时间
+					predicates.add(cb.greaterThanOrEqualTo(root.get("createTime").as(Date.class), stime));
+				}
+				if (etime != null) {
+					// 小于或等于传入时间
+					predicates.add(cb.lessThanOrEqualTo(root.get("createTime").as(Date.class), etime));
+				}
+				// and到一起的话所有条件就是且关系，or就是或关系
+				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+			}
+		};
+		resultList = orderRepository.findAll(querySpecifi, pageRequest);
+
+		return resultList;
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
