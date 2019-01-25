@@ -226,9 +226,9 @@ public class OrderServiceImpl implements OrderService {
 		BigDecimal totalDeduction = new BigDecimal(0);
 		for (Order order : orders) {
 			totalPayment = totalPayment.add(order.getPayment());
-			totalCommodityAmount = totalPayment.add(order.getCommodityAmount());
-			totalPostFee = totalPayment.add(order.getPayment());
-			totalDeduction = totalPayment.add(order.getDeduction());
+			totalCommodityAmount = totalCommodityAmount.add(order.getCommodityAmount());
+			totalPostFee = totalPostFee.add(order.getPayment());
+			totalDeduction = totalDeduction.add(order.getDeduction());
 		}
 		map.put("totalPayment", totalPayment);
 		map.put("totalCommodityAmount", totalCommodityAmount);
