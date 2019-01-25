@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -212,6 +214,27 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order save(Order order) {
 		return orderRepository.save(order);
+	}
+
+	@Override
+	public Map<String, BigDecimal> stats(int[] status, Date stime, Date etime) {
+		List<Order> orders = orderRepository.findByStatusInAndPaymentTimeBetween(status, stime, etime);
+		Map<String, BigDecimal> map = new HashMap<>();
+		BigDecimal totalPayment = new BigDecimal(0);
+		BigDecimal totalCommodityAmount = new BigDecimal(0);
+		BigDecimal totalPostFee = new BigDecimal(0);
+		BigDecimal totalDeduction = new BigDecimal(0);
+		for (Order order : orders) {
+			totalPayment = totalPayment.add(order.getPayment());
+			totalCommodityAmount = totalPayment.add(order.getCommodityAmount());
+			totalPostFee = totalPayment.add(order.getPayment());
+			totalDeduction = totalPayment.add(order.getDeduction());
+		}
+		map.put("totalPayment", totalPayment);
+		map.put("totalCommodityAmount", totalCommodityAmount);
+		map.put("totalPostFee", totalPostFee);
+		map.put("totalDeduction", totalDeduction);
+		return map;
 	}
 
 }

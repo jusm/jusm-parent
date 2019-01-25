@@ -1,7 +1,9 @@
 package com.github.jusm.order.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -88,14 +90,18 @@ public interface OrderService {
 			Date etime, Pageable pageRequest);
 
 	/**
-	 * @param id
-	 * @param receiveType
 	 * @param status
-	 * @param shippingName
-	 * @param userId
 	 * @param stime
 	 * @param etime
 	 * @return
 	 */
 	List<Order> search(int[] status, Date stime, Date etime);
+
+	/**
+	 * @param status
+	 * @param stime
+	 * @param etime
+	 * @return
+	 */
+	Map<String, BigDecimal> stats(int[] status, Date stime, Date etime);
 }
