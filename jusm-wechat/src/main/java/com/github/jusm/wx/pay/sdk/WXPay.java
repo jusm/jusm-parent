@@ -108,6 +108,7 @@ public class WXPay {
 	public SignType getSignType() {
 		return this.signType;
 	}
+	
 	/**
 	 * 判断xml数据的sign是否有效，必须包含sign字段，否则返回false。
 	 *

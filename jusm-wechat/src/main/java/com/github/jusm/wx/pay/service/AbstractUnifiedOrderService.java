@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.jusm.context.CurrentUser;
+import com.github.jusm.exception.ValidException;
 import com.github.jusm.model.R;
 import com.github.jusm.model.ReturnCode;
 import com.github.jusm.util.AddressUtil;
@@ -36,6 +37,32 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 	@Autowired
 	private WXPayConfig wxPayConfig;
 
+	@Override
+	public Map<String, String> closeOrder(String out_trade_no) throws Exception {
+		Map<String, String> reqData = new HashMap<>();
+		if (StringUtils.isNotBlank(out_trade_no)) {
+			reqData.put("out_trade_no", out_trade_no);
+		} else {
+			throw new ValidException("商户订单号  二选一 必填");
+		}
+		return wxPay.closeOrder(reqData);
+	}
+
+	@Override
+	public Map<String, String> orderQuery(String out_trade_no, String transaction_id) throws Exception {
+		Map<String, String> reqData = new HashMap<>();
+		if (StringUtils.isBlank(transaction_id) && StringUtils.isBlank(out_trade_no)) {
+			throw new ValidException("商户订单号  微信订单号  二选一 必填");
+		}
+		if (StringUtils.isNotBlank(out_trade_no)) {
+			reqData.put("out_trade_no", out_trade_no);
+		} else {
+			reqData.put("transaction_id ", transaction_id);
+		}
+		return wxPay.orderQuery(reqData);
+	}
+
+	@Override
 	public String notify(String notifyData) {
 		logger.info("notify() start, notifyData={}", notifyData);
 		String xmlBack = "";
@@ -127,15 +154,15 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 		logger.info("微信支付下单返回值  response={}", response);
 		String returnCode = response.get("return_code");
 		if (!SUCCESS.equals(returnCode)) {
-			return R.result(ReturnCode.UNIFIEDORDER_FAILED,response);
+			return R.result(ReturnCode.UNIFIEDORDER_FAILED, response);
 		}
 		String resultCode = response.get("result_code");
 		if (!SUCCESS.equals(resultCode)) {
-			return R.result(ReturnCode.UNIFIEDORDER_FAILED,response);
+			return R.result(ReturnCode.UNIFIEDORDER_FAILED, response);
 		}
 		String prepay_id = response.get("prepay_id");
 		if (prepay_id == null) {
-			return R.result(ReturnCode.UNIFIEDORDER_FAILED,response);
+			return R.result(ReturnCode.UNIFIEDORDER_FAILED, response);
 		}
 		// 业务处理(保存微信下单结果)
 		Map<String, String> result = new HashMap<>();
@@ -143,7 +170,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 		Map<String, String> wxPayMap = new HashMap<String, String>();
 		wxPayMap.put("appId", response.get("appid"));
 		wxPayMap.put("timeStamp", getCurrentTimeStamp());
-		wxPayMap.put("nonceStr",  response.get("nonce_str"));//TODO RandomStringUtils.randomAlphanumeric(32));//
+		wxPayMap.put("nonceStr", response.get("nonce_str"));// TODO RandomStringUtils.randomAlphanumeric(32));//
 		wxPayMap.put("package", packages);
 		String signType = SignType.HMACSHA256.equals(wxPay.getSignType()) ? WXPayConstants.HMACSHA256
 				: WXPayConstants.MD5;
@@ -152,7 +179,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 		result.put("paySign", sign);
 		result.putAll(wxPayMap);
 		logger.debug("统一支付返回：{}", result);
-		return R.result(ReturnCode.UNIFIEDORDER_SUCCESS,result);
+		return R.result(ReturnCode.UNIFIEDORDER_SUCCESS, result);
 
 	}
 
