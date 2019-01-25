@@ -47,9 +47,9 @@ public class OrderServiceImpl implements OrderService {
 	private OrderShippingRepository orderShippingRepository;
 
 	@Override
-	public Page<Order> search(String id, int[] status, String shippingName, String userId, Date stime, Date etime,
-			Pageable pageRequest) {
-		Page<Order> resultList = null;
+	public Page<Order> search(String id, int receiveType, int[] status, String shippingName, String userId, Date stime,
+			Date etime, Pageable pageRequest) {
+
 		Specification<Order> querySpecifi = new Specification<Order>() {
 			@Override
 			public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
@@ -58,6 +58,10 @@ public class OrderServiceImpl implements OrderService {
 				if (StringUtils.isNotBlank(id)) {
 					// 模糊查找
 					predicates.add(cb.like(root.get("id").as(String.class), "%" + id.trim() + "%"));
+				}
+
+				if (receiveType > 0) {
+					predicates.add(cb.equal(root.get("receiveType").as(Integer.class), receiveType));
 				}
 
 				if (status != null && status.length > 0) {
@@ -90,9 +94,21 @@ public class OrderServiceImpl implements OrderService {
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}
 		};
-		resultList = orderRepository.findAll(querySpecifi, pageRequest);
+		Page<Order> result = orderRepository.findAll(querySpecifi, pageRequest);
 
-		return resultList;
+		if (result != null) {
+			List<Order> content = result.getContent();
+			if (content != null) {
+				for (Order order : content) {
+					List<OrderItem> orderItems = orderItemRepository.findByOrderId(order.getId());
+					order.setOrderItems(orderItems);
+					OrderShipping orderShipping = orderShippingRepository.findByOrderId(order.getId());
+					order.setOrderShipping(orderShipping);
+				}
+			}
+		}
+
+		return result;
 	}
 
 	@Override

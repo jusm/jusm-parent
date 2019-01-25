@@ -1,7 +1,9 @@
 package com.github.jusm.order.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -23,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 @Table(name = "usm_order")
 public class Order extends BasicEntity {
-	
+
 	/**
 	 * 
 	 */
@@ -33,29 +36,28 @@ public class Order extends BasicEntity {
 	private String id;
 
 	@ApiModelProperty(name = "应付总额(单位元)")
-	@NotNull(message="应付总额(单位元) 没有请填写 0.00 ")
+	@NotNull(message = "应付总额(单位元) 没有请填写 0.00 ")
 	private BigDecimal payment;
 
 	@ApiModelProperty(name = "总商品金额(单位元)")
-	@NotNull(message="总商品金额(单位元) 没有请填写 0.00 ")
+	@NotNull(message = "总商品金额(单位元) 没有请填写 0.00 ")
 	private BigDecimal commodityAmount;
-
 
 	@ApiModelProperty(name = "支付类型   1：在线付款  2：货到付款 ")
 	@Column(length = 2)
-	@DecimalMin(value="1",message="最小值为1")
-	@DecimalMax(value="2",message="最小值为2")
+	@DecimalMin(value = "1", message = "最小值为1")
+	@DecimalMax(value = "2", message = "最小值为2")
 	private int paymentType;
-	
+
 	@ApiModelProperty(name = "收货方式   1：邮寄快递  2：门店自提 ")
 	@Column(length = 2)
-	@DecimalMin(value="1",message="最小值为1")
-	@DecimalMax(value="2",message="最小值为2")
+	@DecimalMin(value = "1", message = "最小值为1")
+	@DecimalMax(value = "2", message = "最小值为2")
 	private int receiveType;
 
 	@ApiModelProperty(name = "运费(单位元) 没有请填写 0.00")
 	private BigDecimal postFee;
-	
+
 	@ApiModelProperty(name = "抵扣积分(单位元)")
 	private BigDecimal deduction;
 
@@ -104,6 +106,28 @@ public class Order extends BasicEntity {
 
 	private boolean buyerRate;
 
+	@Transient
+	private List<OrderItem> orderItems = new ArrayList<>();
+
+	@Transient
+	private OrderShipping orderShipping;
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	public OrderShipping getOrderShipping() {
+		return orderShipping;
+	}
+
+	public void setOrderShipping(OrderShipping orderShipping) {
+		this.orderShipping = orderShipping;
+	}
+
 	public String getBuyerMessage() {
 		return buyerMessage;
 	}
@@ -139,7 +163,7 @@ public class Order extends BasicEntity {
 	public BigDecimal getPayment() {
 		return payment;
 	}
-	
+
 	public Date getPaymentTime() {
 		return paymentTime;
 	}

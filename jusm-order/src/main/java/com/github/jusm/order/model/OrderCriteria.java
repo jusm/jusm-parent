@@ -5,6 +5,8 @@ import com.github.jusm.support.PeriodSupport;
 public class OrderCriteria extends PeriodSupport {
 
 	private int[] status;
+	
+	private int receiveType;
 
 	private String id;
 	
@@ -35,6 +37,12 @@ public class OrderCriteria extends PeriodSupport {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public int getReceiveType() {
+		return receiveType;
+	}
+	public void setReceiveType(int receiveType) {
+		this.receiveType = receiveType;
 	}
 	
 }

@@ -6,4 +6,6 @@ import com.github.jusm.order.entity.OrderShipping;
 
 public interface OrderShippingRepository extends JpaRepository<OrderShipping, String> {
 
+	OrderShipping findByOrderId(String id);
+
 }
