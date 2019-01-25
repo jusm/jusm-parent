@@ -78,6 +78,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 				// 注意特殊情况：订单已经退款，但收到了支付结果成功的通知，不应把商户侧订单状态从退款改成支付成功
 				String return_code = notifyMap.get("return_code");// 状态
 				String out_trade_no = notifyMap.get("out_trade_no");// 订单号
+				String total_fee = notifyMap.get("total_fee");
 
 				if (out_trade_no == null) {
 					logger.info("微信支付回调失败订单号: {}", notifyMap);
@@ -86,7 +87,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 					return xmlBack;
 				}
 
-				callback(out_trade_no, return_code);
+				callback(out_trade_no, return_code,Integer.valueOf(total_fee));
 				logger.info("微信支付回调成功订单号: {}", notifyMap);
 				xmlBack = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
 						+ "<return_msg><![CDATA[SUCCESS]]></return_msg>" + "</xml> ";
@@ -112,7 +113,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 	 * @param return_code
 	 * @return
 	 */
-	protected abstract boolean callback(String out_trade_no, String return_code);
+	protected abstract boolean callback(String out_trade_no, String return_code,int total_fee);
 
 	@Override
 	public R unifiedOrder(BasicOrder order) throws Exception {
