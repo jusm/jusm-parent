@@ -84,6 +84,18 @@ public interface OrderService {
 	 * @param pageRequest
 	 * @return
 	 */
-	Page<Order> search(String id, int receiveType, int[] status, String shippingName, String userId, Date stime, Date etime,
-			Pageable pageRequest);
+	Page<Order> search(String id, int receiveType, int[] status, String shippingName, String userId, Date stime,
+			Date etime, Pageable pageRequest);
+
+	/**
+	 * @param id
+	 * @param receiveType
+	 * @param status
+	 * @param shippingName
+	 * @param userId
+	 * @param stime
+	 * @param etime
+	 * @return
+	 */
+	List<Order> search(int[] status, Date stime, Date etime);
 }

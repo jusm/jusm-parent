@@ -29,6 +29,8 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 
 	public static final String SUCCESS = "SUCCESS";
 
+	public static final String NOTPAY = "NOTPAY";
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -43,7 +45,7 @@ public abstract class AbstractUnifiedOrderService implements UnifiedOrderService
 		if (StringUtils.isNotBlank(out_trade_no)) {
 			reqData.put("out_trade_no", out_trade_no);
 		} else {
-			throw new ValidException("商户订单号  二选一 必填");
+			throw new ValidException("商户订单号必填");
 		}
 		return wxPay.closeOrder(reqData);
 	}

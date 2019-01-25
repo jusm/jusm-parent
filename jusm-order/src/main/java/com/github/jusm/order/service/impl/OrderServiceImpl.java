@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -108,6 +108,38 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 
+		return result;
+	}
+
+	@Override
+	public List<Order> search(int[] status, Date stime, Date etime) {
+
+		Specification<Order> querySpecifi = new Specification<Order>() {
+			@Override
+			public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+				List<Predicate> predicates = new ArrayList<>();
+
+				if (status != null && status.length > 0) {
+					In<Integer> in = cb.in(root.get("status"));
+					for (Integer e : status) {
+						in.value(e);
+					}
+					predicates.add(in);
+				}
+
+				if (stime != null) {
+					// 大于或等于传入时间
+					predicates.add(cb.greaterThanOrEqualTo(root.get("createTime").as(Date.class), stime));
+				}
+				if (etime != null) {
+					// 小于或等于传入时间
+					predicates.add(cb.lessThanOrEqualTo(root.get("createTime").as(Date.class), etime));
+				}
+				// and到一起的话所有条件就是且关系，or就是或关系
+				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+			}
+		};
+		List<Order> result = orderRepository.findAll(querySpecifi);
 		return result;
 	}
 
