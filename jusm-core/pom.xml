@@ -11,6 +11,7 @@
 	<description>java版的统一系统管理 </description>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -70,13 +71,13 @@
 			<version>${mybatis.spring.boot.version}</version>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.kyexpress.openapi</groupId> -->
-<!-- 			<artifactId>kye-open-api-sdk</artifactId> -->
-<!-- 			<version>1.0</version> -->
-<!-- 			<scope>system</scope> -->
-<!-- 			<systemPath>${basedir}/sdk/kye-open-api-sdk-1.0.jar</systemPath> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.kyexpress.openapi</groupId> -->
+		<!-- <artifactId>kye-open-api-sdk</artifactId> -->
+		<!-- <version>1.0</version> -->
+		<!-- <scope>system</scope> -->
+		<!-- <systemPath>${basedir}/sdk/kye-open-api-sdk-1.0.jar</systemPath> -->
+		<!-- </dependency> -->
 
 		<!-- <dependency> -->
 		<!-- <groupId>com.qcloud</groupId> -->
@@ -118,7 +119,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-<!-- 			<scope>runtime</scope> -->
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 
 		<dependency>

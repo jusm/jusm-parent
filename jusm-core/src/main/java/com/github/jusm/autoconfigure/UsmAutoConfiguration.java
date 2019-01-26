@@ -1,7 +1,6 @@
 package com.github.jusm.autoconfigure;
 
 import java.io.File;
-import java.util.Map;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.MultipartConfigElement;
@@ -55,6 +54,7 @@ import com.github.jusm.http.DefaultJusmClient;
 import com.github.jusm.http.HeaderBuilder;
 import com.github.jusm.http.JusmClient;
 import com.github.jusm.hystrix.UsmHystrixCommandWapper;
+import com.github.jusm.listener.ApplicationStartup;
 import com.github.jusm.mail.UsmMailConfiguration;
 import com.github.jusm.redis.RedisConfig;
 import com.github.jusm.repository.RoleRepository;
@@ -93,16 +93,13 @@ import com.github.jusm.web.interceptor.InterceptorConfiguration;
 import com.github.jusm.web.thymeleaf.dialect.UsmExpressionObjectDialect;
 import com.github.jusm.web.xxs.XssFilter;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
-import com.google.common.base.Optional;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 
-import io.swagger.models.Swagger;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Documentation;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.DocumentationCache;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -384,6 +381,11 @@ public class UsmAutoConfiguration extends WebSecurityConfigurerAdapter {
 		File userDirectory = FileUtils.getUserDirectory();
 		factory.setLocation(userDirectory.getPath());
 		return factory.createMultipartConfig();
+	}
+	
+	@Bean
+	public ApplicationStartup applicationStartup() {
+		return new ApplicationStartup();
 	}
 
 	@Bean
