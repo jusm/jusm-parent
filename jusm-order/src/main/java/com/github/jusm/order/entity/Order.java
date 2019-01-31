@@ -103,6 +103,8 @@ public class Order extends BasicEntity {
 	private String buyerMessage;
 
 	private String buyerNickName;
+	
+	private String sellerMessage;
 
 	private boolean buyerRate;
 
@@ -270,6 +272,14 @@ public class Order extends BasicEntity {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getSellerMessage() {
+		return sellerMessage;
+	}
+
+	public void setSellerMessage(String sellerMessage) {
+		this.sellerMessage = sellerMessage;
 	}
 
 }

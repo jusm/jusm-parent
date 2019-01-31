@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title th:text="${application.fullname} +' | 资源发布'"></title>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/AdminLTE.min.css">
+<link rel="stylesheet" href="css/_all-skins.min.css">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+	<div class="wrapper">
+		<div th:replace="commons/header :: main-header(${application})"></div>
+		<div th:replace="commons/asider :: main-sidebar(${session},'p_4_2')"></div>
+		<div class="content-wrapper">
+			<section class="content-header"
+				th:replace="commons/content :: content-header('系统维护','资源发布')">
+			</section>
+			<section class="content">
+				<div class="box">
+					<form class="form">cdjklklasjdcklsa jlk</form>
+				</div>
+			</section>
+		</div>
+		<div th:replace="commons/footer :: main-footer(${application})"></div>
+		<div th:replace="commons/setting :: control-sidebar(${application})"></div>
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/adminlte.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/demo.js}"></script>
+</body>
+</html>

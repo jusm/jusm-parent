@@ -359,14 +359,15 @@
 	},
 	{
 		"icon": "fa fa-link",
-		"name": "系统配置",
+		"name": "系统维护",
 		"number": "p_4",
 		"uri": null,
 		"httpMethod": null,
 		"type": "MENU",
 		"description": "描述暂无",
 		"position": 4,
-		"children": [	{
+		"children": [
+			{
 				"icon": "fa fa-link",
 				"name": "环境配置",
 				"number": "p_4_1",
@@ -375,11 +376,34 @@
 				"type": "MENU",
 				"description": "系统环境配置",
 				"position": 1,
-				"children": [	{
+				"children": [
+					{
 						"icon": "fa fa-link",
 						"name": "系统日志",
 						"number": "p_4_1_1",
 						"uri": "/loggers/**",
+						"httpMethod": "POST",
+						"type": "BUTTON",
+						"description": "描述暂无",
+						"position": 1
+					}
+				]
+			},
+			{
+				"icon": "fa fa-link",
+				"name": "网页发布",
+				"number": "p_4_2",
+				"uri": "/deploy.html",
+				"httpMethod": "POST",
+				"type": "MENU",
+				"description": "系统环境配置",
+				"position": 1,
+				"children": [
+					{
+						"icon": "fa fa-link",
+						"name": "发布",
+						"number": "p_4_2_1",
+						"uri": "/deploy/**",
 						"httpMethod": "POST",
 						"type": "BUTTON",
 						"description": "描述暂无",
