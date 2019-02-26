@@ -352,7 +352,7 @@ public class MultiWebSecurityConfiguration extends WebSecurityConfigurerAdapter 
 			failureHandler.setDefaultFailureUrl(antPatternProperties.getLogin());
 			httpSecurity.exceptionHandling().authenticationEntryPoint(new UsmAuthenticationEntryPoint())
 					.accessDeniedHandler(new UsmAccessDeniedHandler());
-			// httpSecurity.csrf().ignoringAntMatchers("/api/**");
+			 httpSecurity.csrf().ignoringAntMatchers("/deploy.html");
 			// CORS ant-pattern
 			httpSecurity.authorizeRequests().antMatchers(antPatternProperties.getAuthorizeAntPatterns()).permitAll();
 			httpSecurity.authorizeRequests().requestMatchers(usmRequestMatcher.getAuthorizeRequestMatcher())

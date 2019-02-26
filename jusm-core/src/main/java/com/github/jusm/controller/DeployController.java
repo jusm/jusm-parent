@@ -29,20 +29,32 @@ public class DeployController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-
 	@GetMapping("deploy.html")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deploy");
 		return mav;
 	}
-	
+
+	@RequestMapping(value = "/form", method = RequestMethod.POST)
+	public String handleFormUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file)
+			throws IOException {
+
+		if (!file.isEmpty()) {
+			byte[] bytes = file.getBytes();
+			// store the bytes somewhere
+			return "redirect:uploadSuccess";
+		} else {
+			return "redirect:uploadFailure";
+		}
+	}
+
 	@ApiOperation(value = "zip信息上传", tags = Conts.Tags.PC)
 	@RequestMapping(value = "deploy/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public @ResponseBody R upload(@ApiParam("图片") @RequestParam(value = "file", required = true) MultipartFile file)
+	public @ResponseBody R upload(@RequestParam(value = "file", required = true) MultipartFile file)
 			throws IOException {
 		List<MultipartFile> fileList = Arrays.asList(file);
-		
+
 		String sharePath = UsmContext.getSharePath();
 		String url = WebContextHolder.getCompleteURL("/res/");
 		return R.success(url);

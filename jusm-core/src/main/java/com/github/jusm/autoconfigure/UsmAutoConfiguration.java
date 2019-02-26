@@ -1,12 +1,8 @@
 package com.github.jusm.autoconfigure;
 
-import java.io.File;
-
 import javax.servlet.DispatcherType;
-import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +19,6 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +44,7 @@ import com.github.jusm.controller.AuthorizeController;
 import com.github.jusm.controller.BasicConsoleController;
 import com.github.jusm.controller.PermissionController;
 import com.github.jusm.controller.ProfilesController;
+import com.github.jusm.controller.RedisController;
 import com.github.jusm.controller.RoleController;
 import com.github.jusm.http.DefaultJusmClient;
 import com.github.jusm.http.HeaderBuilder;
@@ -284,6 +280,11 @@ public class UsmAutoConfiguration extends WebSecurityConfigurerAdapter {
 	public PermissionController permissionController() {
 		return new PermissionController();
 	}
+	
+	@Bean
+	public RedisController redisController() {
+		return new RedisController();
+	}
 
 	@Bean
 	@ConditionalOnMissingBean(value = ProfilesController.class)
@@ -338,6 +339,19 @@ public class UsmAutoConfiguration extends WebSecurityConfigurerAdapter {
 		registration.setOrder(Integer.MAX_VALUE - 1);
 		return registration;
 	}
+	
+	
+//	 @Bean
+//		public FilterRegistrationBean multipartFilter() {
+//			FilterRegistrationBean registration = new FilterRegistrationBean();
+//			registration.setDispatcherTypes(DispatcherType.REQUEST);
+//			MultipartFilter filter = new MultipartFilter();
+//			registration.setFilter(filter);
+//			registration.addUrlPatterns("/*");
+//			registration.setName("MultipartFilter");
+//			registration.setOrder(Integer.MAX_VALUE);
+//			return registration;
+//		}
 
 	@Bean
 	public FilterRegistrationBean requestFilterRegistration() {
@@ -374,14 +388,14 @@ public class UsmAutoConfiguration extends WebSecurityConfigurerAdapter {
 	 * 
 	 * @return
 	 */
-	@Bean
-	public MultipartConfigElement multipartConfigElement() {
-		MultipartConfigFactory factory = new MultipartConfigFactory();
+//	@Bean
+//	public MultipartConfigElement multipartConfigElement() {
+//		MultipartConfigFactory factory = new MultipartConfigFactory();
 		// String tempPath = UsmContextVariables.getTempPath();
-		File userDirectory = FileUtils.getUserDirectory();
-		factory.setLocation(userDirectory.getPath());
-		return factory.createMultipartConfig();
-	}
+//		File userDirectory = FileUtils.getUserDirectory();
+//		factory.setLocation(userDirectory.getPath());
+//		return factory.createMultipartConfig();
+//	}
 	
 	@Bean
 	public ApplicationStartup applicationStartup() {

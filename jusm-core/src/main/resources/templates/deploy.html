@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/AdminLTE.min.css">
 <link rel="stylesheet" href="css/_all-skins.min.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<div th:replace="commons/header :: main-header(${application})"></div>
 		<div th:replace="commons/asider :: main-sidebar(${session},'p_4_2')"></div>
@@ -25,16 +25,19 @@
 			</section>
 			<section class="content">
 				<div class="box">
-				
-					dfeerer
-					<br>
-					brbrbrbrbrbr
-					<br>
+					<form></form>
+					
+					<form th:action="@{/deploy/upload}" th:method="post"
+						enctype="multipart/form-data">
+						<input type="file" id="exampleInputFile" ></input>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+
 				</div>
 			</section>
 		</div>
 		<div th:replace="commons/footer :: main-footer(${application})"></div>
-		<div th:replace="commons/setting :: control-sidebar(${application})"></div>
+		<!-- 		<div th:replace="commons/setting :: control-sidebar(${application})"></div> -->
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<script th:src="@{/js/jquery.min.js}"></script>

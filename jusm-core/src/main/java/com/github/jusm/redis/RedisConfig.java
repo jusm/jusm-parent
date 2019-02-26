@@ -80,4 +80,8 @@ public class RedisConfig {
 				jedisConnectionFactory);
 	}
 
+	@Bean
+	public RedisLock redisLock() {
+		return new RedisLock("1",2000);
+	}
 }

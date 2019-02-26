@@ -1,7 +1,10 @@
 package com.github.jusm.security.initializer;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 import com.github.jusm.redis.RedisHttpSessionConfig;
 
@@ -14,5 +17,10 @@ public class UsmSecurityInitializer extends AbstractSecurityWebApplicationInitia
 
 	public UsmSecurityInitializer() {
 		super(SecurityConfig.class, RedisHttpSessionConfig.class);
+	}
+	
+	@Override
+	protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
+		insertFilters(servletContext, new MultipartFilter());
 	}
 }
