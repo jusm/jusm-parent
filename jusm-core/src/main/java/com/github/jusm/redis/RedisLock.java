@@ -90,21 +90,6 @@ public class RedisLock implements Lock {
 	@Override
 	public boolean tryLock() {
 		String uuid = UUID.randomUUID().toString();
-		// Boolean execute = stringRedisTemplate.execute(new RedisCallback<Boolean>() {
-		// @Override
-		// public Boolean doInRedis(RedisConnection connection) throws
-		// DataAccessException {
-		// Jedis jedis = (Jedis) connection.getNativeConnection();
-		// String result = jedis.set(RedisLock.this.key, uuid, "NX", "PX",
-		// RedisLock.this.expire);
-		// if ("OK".equals(result)) {
-		// threadLocal.set(uuid);
-		// }
-		// return "OK".equals(result);
-		// }
-		// });
-		// System.out.println(execute.booleanValue());
-		// return execute.booleanValue();
 		RedisConnection conn = null;
 		try {
 			conn = RedisConnectionUtils.getConnection(factory);
