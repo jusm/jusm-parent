@@ -51,12 +51,12 @@ public class RedisLock implements Lock {
 	@Override
 	public void lock() {
 		// 1.尝试加锁
-		if (tryLock()) {
+		if (tryLock0()) {
 			return;
 		}
 		// 2.加锁失败尝试加锁 不优雅的地方
 		try {
-			TimeUnit.MILLISECONDS.sleep(this.expire / 2);
+			TimeUnit.MILLISECONDS.sleep(this.expire / 3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -102,6 +102,23 @@ public class RedisLock implements Lock {
 		} finally {
 			RedisConnectionUtils.releaseConnection(conn, factory);
 		}
+	}
+
+	public boolean tryLock0() {
+		String uuid = UUID.randomUUID().toString();
+		Boolean Boolean = stringRedisTemplate.execute(new RedisCallback<Boolean>() {
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				Jedis jedis = (Jedis) connection.getNativeConnection();
+				String result = jedis.set(RedisLock.this.key, uuid, "NX", "PX", RedisLock.this.expire);
+				if ("OK".equals(result)) {
+					threadLocal.set(uuid);
+				}
+				return "OK".equals(result);
+			}
+
+		});
+		return Boolean.booleanValue();
 	}
 
 	@Override

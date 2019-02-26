@@ -23,28 +23,13 @@ public class RedisLockTest {
 	@Resource(name = "redisLock")
 	private Lock lock;
 
-	// private Lock lock = new ReentrantLock();
-
-	// @Test
-	// public void del12() throws InterruptedException {
-	// stringRedisTemplate.delete("wen1");
-	// String andSet = stringRedisTemplate.opsForValue().getAndSet("wen", "122");
-	//
-	// System.out.println(andSet.toString());
-	// stringRedisTemplate.delete("wen");
-	// }
-	// @Test
-	// public void del() throws InterruptedException {
-	// Object andSet = redisTemplate.opsForValue().getAndSet("hao", "122");
-	//
-	// System.out.println(andSet.toString());
-	// }
+//	 private Lock lock = new ReentrantLock();
 
 	public class TicketGen implements Runnable {
 		@Override
 		public void run() {
-			lock.lock();
 			while (count > 0) {
+				lock.lock();
 				try {
 					if (count > 0) {
 						System.out.println(Thread.currentThread().getName() + "销售第" + (count--) + "账票");

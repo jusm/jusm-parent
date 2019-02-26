@@ -82,6 +82,6 @@ public class RedisConfig {
 
 	@Bean
 	public RedisLock redisLock() {
-		return new RedisLock("1",2000);
+		return new RedisLock("redisLock",1000*2000);
 	}
 }
