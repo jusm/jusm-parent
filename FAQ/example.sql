@@ -1,4 +1,4 @@
----所有的字段为Not null
+---所有的字段为Not Null
 SELECT CONCAT (
 '*10\r\n',
 
