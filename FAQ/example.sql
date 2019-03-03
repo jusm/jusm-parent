@@ -1,3 +1,4 @@
+---所有的字段为Not null
 SELECT CONCAT (
 '*10\r\n',
 
@@ -21,9 +22,8 @@ SELECT
 'HSET' AS redis_cmd,
 CONCAT('user:info:',openid) AS redis_key,
 'openid' AS hkey1,openid AS hval1,
-'userid' AS hkey2,openid AS hval2,
-'readlname' AS hkey3,openid AS hval3,
-'score' AS hkey4,openid AS hval4
-
+'user_id' AS hkey2,user_id AS hval2,
+'realname' AS hkey3,realname AS hval3,
+'score' AS hkey4,score AS hval4
 FROM biz_account_balance
 ) AS t
