@@ -1,0 +1,1 @@
+mysql -uroot -p123456 jusm --default-character-set=utf8 --skip-column-names --raw < example.sql | redis-cli -h localhost -p 6379 -a 123456 --pipe
