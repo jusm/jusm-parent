@@ -70,11 +70,11 @@ public class RedisRepository {
 		return (byte[]) redisTemplate.opsForValue().get(key);
 	}
 
-	public void del(byte[] key) {
+	public void delete(byte[] key) {
 		redisTemplate.delete(key);
 	}
 
-	public void delete(byte[]... keys) {
+	public void deleteBatch(byte[]... keys) {
 		redisTemplate.executePipelined(new RedisCallback<Long>() {
 			@Override
 			public Long doInRedis(RedisConnection connection) throws DataAccessException {

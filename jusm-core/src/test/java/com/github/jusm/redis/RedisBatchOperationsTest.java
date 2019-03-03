@@ -45,7 +45,7 @@ public class RedisBatchOperationsTest {
 	@Test
 	public void testDelete() {
 		long t = System.currentTimeMillis();
-		redisRepository.delete((byte[][])(new ArrayList<byte[]>(map.keySet()).toArray()));
+//		redisRepository.delete((byte[][])(new ArrayList<byte[]>(map.keySet()).toArray()));
 		System.out.println(System.currentTimeMillis()- t);
 	}
 }

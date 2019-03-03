@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
 	@Caching(evict = { @CacheEvict(key = "#username"), @CacheEvict(key = "#result") })
 	public void delCache(String username) {
 		String key = RedisKeys.USM_MODULE_SYS_USERINFO + username;
-		redisRepository.del(key.getBytes());
+		redisRepository.delete(key.getBytes());
 	}
 
 	@Override
