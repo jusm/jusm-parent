@@ -2,6 +2,7 @@ package com.github.jusm.redis;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +33,7 @@ public class RedisRepository {
 	private RedisTemplate<String, Object> fastJsonRedisTemplate;
 
 	private RedisTemplate<Object, Object> redisTemplate;
-	
+
 	private JedisConnectionFactory jedisConnectionFactory;
 
 	public RedisRepository(StringRedisTemplate stringRedisTemplate, RedisTemplate<String, Object> fastJsonRedisTemplate,
@@ -42,25 +43,44 @@ public class RedisRepository {
 		this.fastJsonRedisTemplate = fastJsonRedisTemplate;
 		this.jedisConnectionFactory = jedisConnectionFactory;
 	}
-	
+
 	public JedisPoolConfig getRedisPoolConfig() {
 		return jedisConnectionFactory.getPoolConfig();
 	}
-	
+
 	public List<RedisClientInfo> getClientList() {
 		return redisTemplate.getClientList();
 	}
-	
+
 	public void set(byte[] key, byte[] value) {
 		redisTemplate.opsForValue().set(key, value);
 	}
 
+	public void set(Map<byte[], byte[]> map) {
+		redisTemplate.executePipelined(new RedisCallback<String>() {
+			@Override
+			public String doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.mSet(map);
+				return null;
+			}
+		});
+	}
+
 	public byte[] get(byte[] key) {
-		return (byte[])redisTemplate.opsForValue().get(key);
+		return (byte[]) redisTemplate.opsForValue().get(key);
 	}
 
 	public void del(byte[] key) {
 		redisTemplate.delete(key);
+	}
+
+	public void delete(byte[]... keys) {
+		redisTemplate.executePipelined(new RedisCallback<Long>() {
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.del(keys);
+			}
+		});
 	}
 
 	public String get(String key) {
@@ -84,15 +104,15 @@ public class RedisRepository {
 		});
 		return result;
 	}
-	
-	public Long incr(String key, long liveTime,TimeUnit timeUnit) {
-        RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, jedisConnectionFactory);
-        Long increment = entityIdCounter.getAndIncrement();
-        if ((null == increment || increment.longValue() == 0) && liveTime > 0) {//初始设置过期时间
-            entityIdCounter.expire(liveTime, timeUnit);
-        }
-        return increment;
-    }
+
+	public Long incr(String key, long liveTime, TimeUnit timeUnit) {
+		RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, jedisConnectionFactory);
+		Long increment = entityIdCounter.getAndIncrement();
+		if ((null == increment || increment.longValue() == 0) && liveTime > 0) {// 初始设置过期时间
+			entityIdCounter.expire(liveTime, timeUnit);
+		}
+		return increment;
+	}
 
 	public long add(String key, String value, long exipre) {
 

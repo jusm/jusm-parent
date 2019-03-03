@@ -84,4 +84,9 @@ public class RedisConfig {
 	public RedisLock redisLock() {
 		return new RedisLock("redisLock",1000*2000);
 	}
+	
+	@Bean
+	public RedisBatchOperations redisBatchOperations() {
+		return new RedisBatchOperations();
+	}
 }
